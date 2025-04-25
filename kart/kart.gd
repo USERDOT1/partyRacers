@@ -126,8 +126,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				tireIndex = (tireIndex - 1)
 				tireType = tireList[tireIndex]
-	else:
-		print("NOT IN PITSTOP") #ADD VISUAL
+	
 			
 
 
@@ -149,8 +148,10 @@ func areaEntered(area: Area3D) -> void:
 			timer = 0
 	if area.name == "PitstopArea":
 		pitstopStatus = true
+		print("IN PIT")
 
 	
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area.name == "PitstopArea":
 		pitstopStatus = false
+		print('Not in Pitstop')
