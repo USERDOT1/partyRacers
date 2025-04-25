@@ -16,7 +16,7 @@ var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
 var hardDegDiv = 60 #Hard Tire Degs 
 
-var battery = 5
+var battery = 50
 var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "Spend", "Big Spend", "Ultra Spend"]
 var spendingIndex = 3
 var spendingType = spendingList[spendingIndex]
