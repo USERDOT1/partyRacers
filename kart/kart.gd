@@ -39,7 +39,7 @@ var maxSteering = 0.5
 var ourItems = []
 func _ready() -> void:
 	tireType = tireList[tireIndex]
-	$"../CanvasLayer/Hud/SpendingType".text = spendingType
+	$"../CanvasLayer/Hud".spending = spendingType
 	#Setting wheel friction to a variable
 	$FrontLeft.wheel_friction_slip = kartBaseFriction
 	$FrontRight.wheel_friction_slip = kartBaseFriction
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex + 1) 
 			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			$"../CanvasLayer/Hud".spending = spendingType
 			#print(spendingType)
 	if Input.is_action_just_pressed("ChangeBatteryDown"):
 		if spendingIndex == 0:
@@ -72,8 +72,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex - 1) 
 			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
-			#print(spendingType)	
+			$"../CanvasLayer/Hud".spending = spendingType
+			#print(spendingType)
 	
 	# Subject to change in the future from a multiplyer to an addative
 	if spendingType == "Ultra Recharge":
@@ -93,22 +93,23 @@ func _physics_process(delta: float) -> void:
 		if battery - (delta) > 0:
 			battery -= delta
 		elif battery <= 0: #adjusts battery back to balance
-			spendingType = spendingList[spendingIndex - 1]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			spendingType = "Balanced"
+			$"../CanvasLayer/Hud".spending = spendingType
 	elif spendingType == "Big Spend":
 		bonus = 1.35
 		if battery - (1.3*delta) > 0:
 			battery -= 1.3*delta
 		elif battery <= 0:
-			spendingType = spendingList[spendingIndex - 2]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			spendingType = "Balanced"
+			$"../CanvasLayer/Hud".spending = spendingType
 	elif spendingType == "Ultra Spend":
 		bonus = 1.5
 		if battery - (1.8*delta) > 0:
 			battery -= 1.8*delta
 		elif battery <= 0:
-			spendingType = spendingList[spendingIndex - 3]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			spendingType = "Balanced"
+			$"../CanvasLayer/Hud".spending = spendingType
+			
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	

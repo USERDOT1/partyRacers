@@ -1,6 +1,70 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3erjqtrfd8ws"]
+[gd_scene load_steps=9 format=3 uid="uid://c3erjqtrfd8ws"]
 
 [ext_resource type="Script" uid="uid://cdmph3y8s333" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://bfffjb2xmk35u" path="res://textures/energySpendingSprite.png" id="2_64ctp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64ctp"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(14, 0, 7, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_640wx"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(7, 0, 7, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sq4i"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(0, 0, 7, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2258"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(21, 0, 7, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xsix"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(28, 0, 7, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61f8s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64ctp")
+}],
+"loop": true,
+"name": &"Balanced",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_640wx")
+}],
+"loop": true,
+"name": &"Recharge1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sq4i")
+}],
+"loop": true,
+"name": &"Recharge2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2258")
+}],
+"loop": true,
+"name": &"Spend1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xsix")
+}],
+"loop": true,
+"name": &"Spend2",
+"speed": 5.0
+}]
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -20,18 +84,12 @@ offset_right = 76.0
 offset_bottom = 49.0
 text = "Tire Type:"
 
-[node name="EnergySpending" type="Label" parent="."]
-layout_mode = 0
-offset_top = 280.0
-offset_right = 129.0
-offset_bottom = 303.0
-text = "EnergySpending:"
-
 [node name="BatteryDisplay" type="Label" parent="."]
 layout_mode = 0
-offset_top = 229.0
-offset_right = 40.0
-offset_bottom = 252.0
+offset_left = 1053.0
+offset_top = 396.0
+offset_right = 1119.0
+offset_bottom = 419.0
 text = "Battery: "
 
 [node name="Timer" type="Label" parent="."]
@@ -65,3 +123,9 @@ offset_right = 40.0
 offset_bottom = 79.0
 text = "In Pit
 (Use left and right arrows to switch tires)"
+
+[node name="Lights" type="AnimatedSprite2D" parent="."]
+position = Vector2(1094, 283)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_61f8s")
+animation = &"Balanced"
