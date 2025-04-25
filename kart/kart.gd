@@ -6,7 +6,7 @@ extends VehicleBody3D
 @export var tireCondition = 1.2
 @export var maxBattery = 100
 
-
+var pitstopStatus = false
 var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
 var tireIndex = 1
@@ -113,18 +113,21 @@ func _physics_process(delta: float) -> void:
 			spendingType = spendingList[spendingIndex]
 			$"../CanvasLayer/Hud/SpendingType".text = spendingType
 			#print(spendingType)
-	if Input.is_action_just_pressed("ChangeWheelsUp"):
-		if tireIndex == 2:
-			print('MAX HARD TIRES')#add visual
-		else:
-			tireIndex = (tireIndex + 1)
-			tireType = tireList[tireIndex]
-	if Input.is_action_just_pressed("ChangeWheelsDown"):
-		if tireIndex == 0:
-			print('MAX SOFT TIRES')#add visual
-		else:
-			tireIndex = (tireIndex - 1)
-			tireType = tireList[tireIndex]
+	if pitstopStatus == true:
+		if Input.is_action_just_pressed("ChangeWheelsUp"):
+			if tireIndex == 2:
+				print('MAX HARD TIRES')#add visual
+			else:
+				tireIndex = (tireIndex + 1)
+				tireType = tireList[tireIndex]
+		if Input.is_action_just_pressed("ChangeWheelsDown"):
+			if tireIndex == 0:
+				print('MAX SOFT TIRES')#add visual
+			else:
+				tireIndex = (tireIndex - 1)
+				tireType = tireList[tireIndex]
+	else:
+		print("NOT IN PITSTOP") #ADD VISUAL
 			
 
 
@@ -144,3 +147,10 @@ func areaEntered(area: Area3D) -> void:
 			if bestTime > timer:
 				bestTime = timer
 			timer = 0
+	if area.name == "PitstopArea":
+		pitstopStatus = true
+
+	
+func _on_area_3d_area_exited(area: Area3D) -> void:
+	if area.name == "PitstopArea":
+		pitstopStatus = false

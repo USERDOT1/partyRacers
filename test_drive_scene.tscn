@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://clx5aohfceppe"]
+[gd_scene load_steps=45 format=3 uid="uid://clx5aohfceppe"]
 
 [ext_resource type="Script" uid="uid://dvcjdfaqwb1rb" path="res://test_drive_scene.gd" id="1_x5vpf"]
 [ext_resource type="Texture2D" uid="uid://bw78ut44ha8m4" path="res://textures/dark-grey-stone-texture_1375194.jpg" id="2_cc381"]
@@ -21,6 +21,9 @@ uv1_scale = Vector3(50, 50, 2)
 [sub_resource type="PlaneMesh" id="PlaneMesh_okf4r"]
 material = SubResource("StandardMaterial3D_782t0")
 size = Vector2(500, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nhv88"]
+size = Vector3(5, 5, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5vpf"]
 size = Vector3(1, 4, 27.205)
@@ -143,6 +146,12 @@ skeleton = NodePath("../..")
 
 [node name="Kart" parent="." instance=ExtResource("3_st0yn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -431.755, 463.759, -208.592)
+
+[node name="PitstopArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.7495, 0, 45.238)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PitstopArea"]
+shape = SubResource("BoxShape3D_nhv88")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
