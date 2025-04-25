@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://bney1s5re8mc8"]
+
+[ext_resource type="Script" uid="uid://4nxtuh37kl6y" path="res://kart/kart.gd" id="1_souiu"]
+[ext_resource type="Texture2D" uid="uid://bm08yb411rgud" path="res://textures/car-tires.png" id="2_co00p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okf4r"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_782t0"]
+material = SubResource("StandardMaterial3D_okf4r")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_782t0"]
+size = Vector3(1, 0.379395, 1.97496)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eouea"]
+albedo_texture = ExtResource("2_co00p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iw6i7"]
+albedo_color = Color(0.194349, 0.194349, 0.194349, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_782t0"]
+material = SubResource("StandardMaterial3D_iw6i7")
+top_radius = 0.31
+bottom_radius = 0.31
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5vpf"]
+albedo_texture = ExtResource("2_co00p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5scuc"]
+albedo_texture = ExtResource("2_co00p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st0yn"]
+albedo_texture = ExtResource("2_co00p")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x5vpf"]
+radius = 0.570255
+height = 2.08992
+
+[node name="Kart" type="VehicleBody3D"]
+script = ExtResource("1_souiu")
+turnSpeed = 1
+
+[node name="CarBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.367905, 0, 0, 0, 1.97177, 0, 0, 0)
+mesh = SubResource("BoxMesh_782t0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000244141, -0.00148773)
+shape = SubResource("BoxShape3D_782t0")
+
+[node name="FrontLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675278, 0, 0.752163)
+use_as_steering = true
+wheel_radius = 0.31
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontLeft"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_eouea")
+mesh = SubResource("CylinderMesh_782t0")
+
+[node name="FrontRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.678661, 0, 0.752163)
+use_as_steering = true
+wheel_radius = 0.31
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="FrontRight"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.0282505, 0, 0)
+material_override = SubResource("StandardMaterial3D_x5vpf")
+mesh = SubResource("CylinderMesh_782t0")
+skeleton = NodePath("../../FrontLeft")
+
+[node name="BackRight" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.678661, 0, -0.762351)
+use_as_traction = true
+wheel_radius = 0.31
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BackRight"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.0282505, 0, 0)
+material_override = SubResource("StandardMaterial3D_5scuc")
+mesh = SubResource("CylinderMesh_782t0")
+skeleton = NodePath("../../FrontLeft")
+
+[node name="BackLeft" type="VehicleWheel3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675279, 0, -0.762351)
+use_as_traction = true
+wheel_roll_influence = 0.5
+wheel_radius = 0.31
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BackLeft"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.0282505, 0, 0)
+material_override = SubResource("StandardMaterial3D_st0yn")
+mesh = SubResource("CylinderMesh_782t0")
+skeleton = NodePath("../../FrontLeft")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -0.0338006, -0.999429, 0, 0.999429, -0.0338006, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_x5vpf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, 7.80976e-08, 0.893332, 0.449397, 3.92875e-08, 0.449397, -0.893332, 0, 3.978, -5.992)
+far = 12000.0
+
+[connection signal="area_entered" from="Area3D" to="." method="areaEntered"]

@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3erjqtrfd8ws"]
+
+[ext_resource type="Script" uid="uid://cdmph3y8s333" path="res://hud.gd" id="1_37p78"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_37p78")
+
+[node name="TireCondition" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Tire Condition: "
+
+[node name="TireType" type="Label" parent="."]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 76.0
+offset_bottom = 49.0
+text = "Tire Type:"
+
+[node name="TireTypeSelect" type="OptionButton" parent="."]
+layout_mode = 0
+offset_top = 123.0
+offset_right = 96.0
+offset_bottom = 154.0
+selected = 1
+item_count = 3
+popup/item_0/text = "Soft"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
+[node name="Pitstop" type="Button" parent="."]
+layout_mode = 0
+offset_top = 172.0
+offset_right = 64.0
+offset_bottom = 203.0
+text = "PitStop"
+
+[node name="EnergySpending" type="Label" parent="."]
+layout_mode = 0
+offset_top = 280.0
+offset_right = 129.0
+offset_bottom = 303.0
+text = "EnergySpending:"
+
+[node name="BatteryDisplay" type="Label" parent="."]
+layout_mode = 0
+offset_top = 229.0
+offset_right = 40.0
+offset_bottom = 252.0
+text = "Battery: "
+
+[node name="Timer" type="Label" parent="."]
+layout_mode = 1
+offset_left = 987.0
+offset_right = 1139.0
+offset_bottom = 23.0
+text = "Current Time: 0.000"
+vertical_alignment = 1
+
+[node name="BestTime" type="Label" parent="."]
+layout_mode = 1
+offset_left = 987.0
+offset_top = 22.0
+offset_right = 1072.0
+offset_bottom = 45.0
+text = "Best Time: "
+horizontal_alignment = 2
+
+[node name="SpendingType" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 309.0
+offset_right = 139.0
+offset_bottom = 332.0
+
+[connection signal="pressed" from="Pitstop" to="." method="_on_pitstop_pressed"]
