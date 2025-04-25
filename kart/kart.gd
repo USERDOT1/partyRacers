@@ -6,7 +6,7 @@ extends VehicleBody3D
 @export var tireCondition = 1.2
 @export var maxBattery = 100
 
-var pitstopStatus = false
+var inPit = false
 var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
 var tireIndex = 1
@@ -40,17 +40,24 @@ var ourItems = []
 func _ready() -> void:
 	tireType = tireList[tireIndex]
 	$"../CanvasLayer/Hud/SpendingType".text = spendingType
-func _physics_process(delta: float) -> void:
+	#Setting wheel friction to a variable
 	$FrontLeft.wheel_friction_slip = kartBaseFriction
 	$FrontRight.wheel_friction_slip = kartBaseFriction
 	$BackRight.wheel_friction_slip = kartBaseFriction
 	$BackLeft.wheel_friction_slip = kartBaseFriction
+	
+	#Setting the kart roll influence to a variable
 	$FrontLeft.wheel_roll_influence = kartBaseFlipResistence
 	$FrontRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackLeft.wheel_roll_influence = kartBaseFlipResistence
+func _physics_process(delta: float) -> void:
+	
+	# If we are in the track, increase the timer
 	if inTrack:
 		timer += delta
+		
+	# Subject to change in the future from a multiplyer to an addative
 	if spendingType == "Ultra Recharge":
 		bonus = 0.5
 		battery += 1.8*delta
@@ -81,11 +88,14 @@ func _physics_process(delta: float) -> void:
 			battery -= 1.8*delta
 		else:
 			$"../CanvasLayer/Hud/BatterySpending".selected = 3
-	
+	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
-	#print(bonus)
+	
+	#Steering based on the tireCondition, maxing out at maxSteering
 	steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
 	engine_force = Input.get_axis("break","throttle") * baseEnginePower * bonus
+	
+	# Degrading tire condition based on above variables
 	if tireType == "Soft":
 		tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(softDegDiv*1000000)
 	elif tireType == "Medium":
@@ -93,8 +103,8 @@ func _physics_process(delta: float) -> void:
 	elif tireType == "Hard":
 		tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(hardDegDiv*1000000)
 	
+	#clamps tire condition (never going to hit the top, just the bottom)
 	tireCondition = clamp(tireCondition, 0.2, 100)
-	#print(tireCondition)
 	
 	#Hotkeys for Changing Battery
 	if Input.is_action_just_pressed("ChangeBatteryUp"):
@@ -107,37 +117,47 @@ func _physics_process(delta: float) -> void:
 			#print(spendingType)
 	if Input.is_action_just_pressed("ChangeBatteryDown"):
 		if spendingIndex == 0:
-			print("MAX RECHARGE") #ADD SOMETHING VISUAL
+			print("MAX RECHARGE") #ADD SOMETHING VISUAL (FR)
 		else:
 			spendingIndex = (spendingIndex - 1) 
 			spendingType = spendingList[spendingIndex]
 			$"../CanvasLayer/Hud/SpendingType".text = spendingType
 			#print(spendingType)
-	if pitstopStatus == true:
+	if inPit:
 		if Input.is_action_just_pressed("ChangeWheelsUp"):
 			if tireIndex == 2:
-				print('MAX HARD TIRES')#add visual
+				print('Maxed out (cant make tires harder)')#add visual
+				tireCondition = 0.8
 			else:
 				tireIndex = (tireIndex + 1)
 				tireType = tireList[tireIndex]
+				if tireList[tireIndex] == "Hard":
+					tireCondition = 0.8
+				if tireList[tireIndex] == "Medium":
+					tireCondition = 1.2
 		if Input.is_action_just_pressed("ChangeWheelsDown"):
 			if tireIndex == 0:
-				print('MAX SOFT TIRES')#add visual
+				print('Maxed out (cant make tires softer)')#add visual
+				tireCondition = 2
 			else:
 				tireIndex = (tireIndex - 1)
 				tireType = tireList[tireIndex]
-	
-			
+				if tireList[tireIndex] == "Medium":
+					tireCondition = 1.2
+				if tireList[tireIndex] == "Soft":
+					tireCondition = 2
 
 
 func powerup():
 	if len(ourItems) < 3:
+		#if we have less than 3 items add another
 		ourItems.append(get_parent().itemList.pick_random())
 		print(ourItems)
 		
 
 
 func areaEntered(area: Area3D) -> void:
+	#Checking if we entered pit, or started or finished a race
 	if area.name == "Start":
 		inTrack = true
 	elif area.name == "Finish":
@@ -147,11 +167,12 @@ func areaEntered(area: Area3D) -> void:
 				bestTime = timer
 			timer = 0
 	if area.name == "PitstopArea":
-		pitstopStatus = true
-		print("IN PIT")
+		inPit = true
+		print("entered Pit")
 
 	
 func _on_area_3d_area_exited(area: Area3D) -> void:
+	#If exiting pit, setting it to false
 	if area.name == "PitstopArea":
-		pitstopStatus = false
-		print('Not in Pitstop')
+		inPit = false
+		print("exited Pit")

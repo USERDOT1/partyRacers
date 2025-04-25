@@ -23,7 +23,7 @@ material = SubResource("StandardMaterial3D_782t0")
 size = Vector2(500, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nhv88"]
-size = Vector3(5, 5, 5)
+size = Vector3(8, 5, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5vpf"]
 size = Vector3(1, 4, 27.205)
@@ -148,7 +148,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -431.755, 463.759, -208.592)
 
 [node name="PitstopArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.7495, 0, 45.238)
+transform = Transform3D(0.814197, 0, -0.580589, 0, 1, 0, 0.580589, 0, 0.814197, 47.5829, 0.4443, 42.8629)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PitstopArea"]
 shape = SubResource("BoxShape3D_nhv88")
