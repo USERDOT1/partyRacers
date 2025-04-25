@@ -8,19 +8,11 @@ func _process(delta: float) -> void:
 	$TireType.text = "Tire Type: " + str(get_parent().get_parent().kart.tireType)
 	$BatteryDisplay.text = "Battery: " + str(roundi(get_parent().get_parent().kart.battery)) + "%"
 	
-	
+	if get_parent().get_parent().kart.inPit:
+		$"Pit Condition".text = "In Pit\n(Use left and right arrows to switch tires)"
+	else:
+		$"Pit Condition".text = "Out Of Pit"
 
 
-func _on_pitstop_pressed() -> void:
-	if $TireTypeSelect.selected == 0:
-		get_parent().get_parent().kart.tireType = "Soft"
-		get_parent().get_parent().kart.tireCondition = 2.0
-	elif $TireTypeSelect.selected == 1:
-		get_parent().get_parent().kart.tireType = "Medium"
-		get_parent().get_parent().kart.tireCondition = 1.2
-	elif $TireTypeSelect.selected == 2:
-		get_parent().get_parent().kart.tireType = "Hard"
-		get_parent().get_parent().kart.tireCondition = 0.8
-	
 func round_place(num,places):
 	return (round(num*pow(10,places))/pow(10,places))

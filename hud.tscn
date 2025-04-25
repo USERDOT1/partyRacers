@@ -20,27 +20,6 @@ offset_right = 76.0
 offset_bottom = 49.0
 text = "Tire Type:"
 
-[node name="TireTypeSelect" type="OptionButton" parent="."]
-layout_mode = 0
-offset_top = 123.0
-offset_right = 96.0
-offset_bottom = 154.0
-selected = 1
-item_count = 3
-popup/item_0/text = "Soft"
-popup/item_0/id = 0
-popup/item_1/text = "Medium"
-popup/item_1/id = 1
-popup/item_2/text = "Hard"
-popup/item_2/id = 2
-
-[node name="Pitstop" type="Button" parent="."]
-layout_mode = 0
-offset_top = 172.0
-offset_right = 64.0
-offset_bottom = 203.0
-text = "PitStop"
-
 [node name="EnergySpending" type="Label" parent="."]
 layout_mode = 0
 offset_top = 280.0
@@ -79,4 +58,10 @@ offset_top = 309.0
 offset_right = 139.0
 offset_bottom = 332.0
 
-[connection signal="pressed" from="Pitstop" to="." method="_on_pitstop_pressed"]
+[node name="Pit Condition" type="Label" parent="."]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 40.0
+offset_bottom = 79.0
+text = "In Pit
+(Use left and right arrows to switch tires)"
