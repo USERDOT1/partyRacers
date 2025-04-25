@@ -48,7 +48,7 @@ offset_left = 987.0
 offset_top = 22.0
 offset_right = 1072.0
 offset_bottom = 45.0
-text = "Best Time: "
+text = "among us"
 horizontal_alignment = 2
 
 [node name="SpendingType" type="Label" parent="."]
