@@ -16,7 +16,7 @@ var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
 var hardDegDiv = 60 #Hard Tire Degs 
 
-var battery = 50
+var battery = 5
 var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "Spend", "Big Spend", "Ultra Spend"]
 var spendingIndex = 3
 var spendingType = spendingList[spendingIndex]
@@ -56,7 +56,25 @@ func _physics_process(delta: float) -> void:
 	# If we are in the track, increase the timer
 	if inTrack:
 		timer += delta
-		
+	
+	#Hotkeys for Changing Battery
+	if Input.is_action_just_pressed("ChangeBatteryUp"):
+		if spendingIndex == 6:
+			print("MAX SPEND") #ADD SOMETHING VISUAL
+		else:
+			spendingIndex = (spendingIndex + 1) 
+			spendingType = spendingList[spendingIndex]
+			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			#print(spendingType)
+	if Input.is_action_just_pressed("ChangeBatteryDown"):
+		if spendingIndex == 0:
+			print("MAX RECHARGE") #ADD SOMETHING VISUAL (FR)
+		else:
+			spendingIndex = (spendingIndex - 1) 
+			spendingType = spendingList[spendingIndex]
+			$"../CanvasLayer/Hud/SpendingType".text = spendingType
+			#print(spendingType)	
+	
 	# Subject to change in the future from a multiplyer to an addative
 	if spendingType == "Ultra Recharge":
 		bonus = 0.5
@@ -74,20 +92,23 @@ func _physics_process(delta: float) -> void:
 		bonus = 1.2
 		if battery - (delta) > 0:
 			battery -= delta
-		else:
-			$"../CanvasLayer/Hud/BatterySpending".selected = 3
+		elif battery <= 0: #adjusts battery back to balance
+			spendingType = spendingList[spendingIndex - 1]
+			$"../CanvasLayer/Hud/SpendingType".text = spendingType
 	elif spendingType == "Big Spend":
 		bonus = 1.35
 		if battery - (1.3*delta) > 0:
 			battery -= 1.3*delta
-		else:
-			$"../CanvasLayer/Hud/BatterySpending".selected = 3
+		elif battery <= 0:
+			spendingType = spendingList[spendingIndex - 2]
+			$"../CanvasLayer/Hud/SpendingType".text = spendingType
 	elif spendingType == "Ultra Spend":
 		bonus = 1.5
 		if battery - (1.8*delta) > 0:
 			battery -= 1.8*delta
-		else:
-			$"../CanvasLayer/Hud/BatterySpending".selected = 3
+		elif battery <= 0:
+			spendingType = spendingList[spendingIndex - 3]
+			$"../CanvasLayer/Hud/SpendingType".text = spendingType
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	
@@ -106,23 +127,7 @@ func _physics_process(delta: float) -> void:
 	#clamps tire condition (never going to hit the top, just the bottom)
 	tireCondition = clamp(tireCondition, 0.2, 100)
 	
-	#Hotkeys for Changing Battery
-	if Input.is_action_just_pressed("ChangeBatteryUp"):
-		if spendingIndex == 6:
-			print("MAX SPEND") #ADD SOMETHING VISUAL
-		else:
-			spendingIndex = (spendingIndex + 1) 
-			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
-			#print(spendingType)
-	if Input.is_action_just_pressed("ChangeBatteryDown"):
-		if spendingIndex == 0:
-			print("MAX RECHARGE") #ADD SOMETHING VISUAL (FR)
-		else:
-			spendingIndex = (spendingIndex - 1) 
-			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud/SpendingType".text = spendingType
-			#print(spendingType)
+	
 	if inPit:
 		if Input.is_action_just_pressed("ChangeWheelsUp"):
 			if tireIndex == 2:
