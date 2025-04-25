@@ -44,15 +44,11 @@ vertical_alignment = 1
 
 [node name="BestTime" type="Label" parent="."]
 layout_mode = 1
-offset_left = 987.0
-offset_top = 231.0
-offset_right = 1072.0
-
-offset_bottom = 254.0
-
-
+offset_left = 989.0
+offset_top = 33.0
+offset_right = 1074.0
+offset_bottom = 56.0
 text = "among us"
-
 horizontal_alignment = 2
 
 [node name="SpendingType" type="Label" parent="."]
