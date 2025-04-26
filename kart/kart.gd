@@ -11,6 +11,7 @@ var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
 var tireIndex = 1
 
+@export var itemList = ["boost","phase","amogus"]
 
 var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
@@ -33,7 +34,7 @@ var identification = "kart"
 var oogaBonus = 0
 
 var kartBaseFriction = 10.5
-var kartBaseFlipResistence = 0.2
+var kartBaseFlipResistence = 0.1
 var maxSteering = 0.5
 
 var ourItems = []
@@ -157,7 +158,7 @@ func _physics_process(delta: float) -> void:
 func powerup():
 	if len(ourItems) < 3:
 		#if we have less than 3 items add another
-		ourItems.append(get_parent().itemList.pick_random())
+		ourItems.append(itemList.pick_random())
 		print(ourItems)
 		
 

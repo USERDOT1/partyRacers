@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bw78ut44ha8m4" path="res://textures/dark-grey-stone-texture_1375194.jpg" id="1_78u23"]
 [ext_resource type="Texture2D" uid="uid://bskraib5m528i" path="res://icon.svg" id="2_n2mvi"]
-[ext_resource type="PhysicsMaterial" uid="uid://bh378xrgcayno" path="res://ice.tres" id="3_rmnxb"]
+[ext_resource type="PhysicsMaterial" uid="uid://bh378xrgcayno" path="res://materials/physics/icePhysics.tres" id="3_rmnxb"]
 [ext_resource type="Texture2D" uid="uid://cmsiaxfbdj0yb" path="res://textures/Cracked Blue Ice Seamless Cover.png" id="4_lb750"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_st0yn"]

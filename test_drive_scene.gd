@@ -1,6 +1,5 @@
 extends Node3D
 @onready var kart = $Kart
-@export var itemList = ["boost","phase","amogus"]
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("resetKart"):

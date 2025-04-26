@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://bney1s5re8mc8"]
+[gd_scene load_steps=17 format=3 uid="uid://bney1s5re8mc8"]
 
 [ext_resource type="Script" uid="uid://4nxtuh37kl6y" path="res://kart/kart.gd" id="1_souiu"]
 [ext_resource type="Texture2D" uid="uid://bm08yb411rgud" path="res://textures/car-tires.png" id="2_co00p"]
+[ext_resource type="Texture2D" uid="uid://bthivhuv27ofu" path="res://textures/Epic_BlueSunset_EquiRect_flat.png" id="3_co00p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okf4r"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_782t0"]
 material = SubResource("StandardMaterial3D_okf4r")
+size = Vector3(1, 0.36, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_782t0"]
 size = Vector3(1, 0.379395, 1.97496)
@@ -37,12 +39,22 @@ albedo_texture = ExtResource("2_co00p")
 radius = 0.570255
 height = 2.08992
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bv6v8"]
+panorama = ExtResource("3_co00p")
+
+[sub_resource type="Sky" id="Sky_lt3ne"]
+sky_material = SubResource("PanoramaSkyMaterial_bv6v8")
+
+[sub_resource type="Environment" id="Environment_b12jd"]
+background_mode = 2
+sky = SubResource("Sky_lt3ne")
+glow_enabled = true
+
 [node name="Kart" type="VehicleBody3D"]
 script = ExtResource("1_souiu")
 turnSpeed = 1
 
 [node name="CarBody" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.367905, 0, 0, 0, 1.97177, 0, 0, 0)
 mesh = SubResource("BoxMesh_782t0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -101,6 +113,7 @@ shape = SubResource("CapsuleShape3D_x5vpf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, 7.80976e-08, 0.893332, 0.449397, 3.92875e-08, 0.449397, -0.893332, 0, 3.978, -5.992)
+environment = SubResource("Environment_b12jd")
 far = 12000.0
 
 [connection signal="area_entered" from="Area3D" to="." method="areaEntered"]

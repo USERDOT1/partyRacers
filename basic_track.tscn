@@ -1,0 +1,264 @@
+[gd_scene load_steps=26 format=3 uid="uid://jbvvpfdptouy"]
+
+[ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
+[ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
+[ext_resource type="Texture2D" uid="uid://dpuastx8oc8gh" path="res://textures/GrassTextureGood.jpg" id="2_kfwyd"]
+[ext_resource type="PackedScene" uid="uid://bney1s5re8mc8" path="res://kart/kart.tscn" id="2_s41hh"]
+[ext_resource type="PackedScene" uid="uid://c3erjqtrfd8ws" path="res://hud.tscn" id="3_s41hh"]
+[ext_resource type="PackedScene" uid="uid://l2v77imjmpif" path="res://itemBox/item_box.tscn" id="4_adgoi"]
+[ext_resource type="Material" uid="uid://c5w4e1rktr60w" path="res://materials/basic_track.tres" id="7_8q44g"]
+[ext_resource type="Material" uid="uid://bne6kmadv3rau" path="res://materials/curbMaterial.tres" id="8_8q44g"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_adgoi"]
+friction = 0.4
+rough = true
+bounce = 0.11
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rwpf"]
+albedo_texture = ExtResource("2_kfwyd")
+normal_enabled = true
+normal_texture = ExtResource("1_g6n3r")
+uv1_scale = Vector3(500, 500, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rt2xc"]
+material = SubResource("StandardMaterial3D_4rwpf")
+size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rwpf"]
+size = Vector3(500, 1, 500)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k1q3v"]
+friction = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_adgoi"]
+size = Vector3(9, 1, 120)
+
+[sub_resource type="BoxMesh" id="BoxMesh_adgoi"]
+material = ExtResource("7_8q44g")
+size = Vector3(19, 2, 120)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_depfd"]
+size = Vector3(9, 1, 57)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a31a0"]
+material = ExtResource("7_8q44g")
+size = Vector3(17, 2, 57)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k1q3v"]
+size = Vector3(1, 0.2, 120)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8q44g"]
+material = ExtResource("8_8q44g")
+size = Vector3(1, 0.2, 120)
+
+[sub_resource type="BoxMesh" id="BoxMesh_depfd"]
+material = ExtResource("8_8q44g")
+size = Vector3(1, 0.2, 11)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8q44g"]
+size = Vector3(1, 0.2, 11)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6k3nd"]
+material = ExtResource("8_8q44g")
+size = Vector3(1, 7.5, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tymbd"]
+size = Vector3(1, 7.5, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3csay"]
+material = ExtResource("7_8q44g")
+size = Vector3(13, 4, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a31a0"]
+size = Vector3(11, 4, 20)
+
+[node name="BasicTrack" type="Node3D"]
+script = ExtResource("1_kfwyd")
+
+[node name="Grass" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_adgoi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grass"]
+mesh = SubResource("BoxMesh_rt2xc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass"]
+shape = SubResource("BoxShape3D_4rwpf")
+
+[node name="ItemBoxSpawn" parent="Grass" instance=ExtResource("4_adgoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02375, 1, -11.171)
+
+[node name="Kart" parent="." instance=ExtResource("2_s41hh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.60066, 10.1479, -54.7725)
+center_of_mass_mode = 1
+can_sleep = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("3_s41hh")]
+
+[node name="TrackStartingStraight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495894, 0)
+physics_material_override = SubResource("PhysicsMaterial_k1q3v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrackStartingStraight"]
+shape = SubResource("BoxShape3D_adgoi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackStartingStraight"]
+mesh = SubResource("BoxMesh_adgoi")
+
+[node name="TrackStartingStraight2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.0944, -0.495894, 68.1304)
+physics_material_override = SubResource("PhysicsMaterial_k1q3v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrackStartingStraight2"]
+shape = SubResource("BoxShape3D_depfd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackStartingStraight2"]
+mesh = SubResource("BoxMesh_a31a0")
+
+[node name="Curb" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97731, 0.570522, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb"]
+shape = SubResource("BoxShape3D_k1q3v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb"]
+mesh = SubResource("BoxMesh_8q44g")
+
+[node name="Curb2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95128, 0.570522, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb2"]
+shape = SubResource("BoxShape3D_k1q3v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb2"]
+mesh = SubResource("BoxMesh_8q44g")
+
+[node name="CurbOutsideTurn" type="StaticBody3D" parent="."]
+transform = Transform3D(0.951487, 0, 0.307689, 0, 1, 0, -0.307689, 0, 0.951487, -8.38322, 0.571, 64.745)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn9" type="StaticBody3D" parent="."]
+transform = Transform3D(0.951594, 0, -0.307357, 0, 1, 0, 0.307357, 0, 0.951594, 42.5955, 0.571, 64.3456)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn9"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.674522, 0, 0.738255, 0, 1, 0, -0.738255, 0, 0.674522, -2.94523, 0.571, 73.1856)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn2"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn10" type="StaticBody3D" parent="."]
+transform = Transform3D(0.674302, 0, -0.738455, 0, 1, 0, 0.738455, 0, 0.674302, 36.9174, 0.571, 73.1856)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn10"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.19519, 0.571, 76.7343)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn3"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn4" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 17.0972, 0.571, 76.7343)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn4"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn5" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 27.8923, 0.571, 76.7343)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn5"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn6" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.8756, 0.571, 59.4546)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn6"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn7" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 25.4688, 0.571, 59.4546)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_depfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn7"]
+shape = SubResource("BoxShape3D_8q44g")
+
+[node name="CurbOutsideTurn8" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.2721, 0.571, 49.5033)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_6k3nd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn8"]
+shape = SubResource("BoxShape3D_tymbd")
+
+[node name="CurbOutsideTurn11" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9875, 0.571, 49.5033)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CurbOutsideTurn11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("8_8q44g")
+mesh = SubResource("BoxMesh_6k3nd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurbOutsideTurn11"]
+shape = SubResource("BoxShape3D_tymbd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989152, -0.146894, 0, 0.146894, 0.989152, 37.2668, 0, 49.902)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_3csay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_a31a0")
