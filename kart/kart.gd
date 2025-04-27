@@ -4,7 +4,7 @@ extends VehicleBody3D
 @export var baseEnginePower = 300
 @export var turnSpeed = 6
 @export var tireCondition = 1.2
-@export var maxBattery = 100
+var maxBattery = 60
 
 var inPit = false
 var tireType = "Medium"
@@ -17,7 +17,7 @@ var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
 var hardDegDiv = 60 #Hard Tire Degs 
 
-var battery = 50
+var battery = 30
 var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "Spend", "Big Spend", "Ultra Spend"]
 var spendingIndex = 3
 var spendingType = spendingList[spendingIndex]

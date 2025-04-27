@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	
 	$TireCondition.text = "Tire Condition: " + str(roundi(get_parent().get_parent().kart.tireCondition*1000))
 	$TireType.text = "Tire Type: " + str(get_parent().get_parent().kart.tireType)
-	$BatteryDisplay.text = "Battery: " + str(roundi(get_parent().get_parent().kart.battery)) + "%"
+	$BatteryDisplay.text = "Battery: " + str(roundi(get_parent().get_parent().kart.battery*100/get_parent().get_parent().kart.maxBattery)) + "%"
 	
 	if get_parent().get_parent().kart.inPit:
 		$"Pit Condition".text = "In Pit\n(Use left and right arrows to switch tires)"
