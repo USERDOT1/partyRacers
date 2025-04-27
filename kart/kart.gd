@@ -26,8 +26,8 @@ var spendingType = spendingList[spendingIndex]
 var bonus = 1
 
 var timer = 0
-var bestTime = 100
-var inTrack = false
+var bestTime = 1000
+var inTrack = true
 var identification = "kart"
 
 
@@ -39,6 +39,9 @@ var maxSteering = 0.5
 
 var ourItems = []
 
+var laps = 1
+
+var checkpointPassed = false
 func _ready() -> void:
 	tireType = tireList[tireIndex]
 	$"../CanvasLayer/Hud".spending = spendingType
@@ -168,18 +171,22 @@ func powerup():
 
 func areaEntered(area: Area3D) -> void:
 	#Checking if we entered pit, or started or finished a race
-	if area.name == "Start":
-		inTrack = true
-	elif area.name == "Finish":
-		if inTrack:
-			inTrack = false
-			if bestTime > timer:
-				bestTime = timer
-			timer = 0
+	#if area.name == "Start":
+	#	inTrack = true
+	if area.name == "Finish":
+		if laps != (get_parent().maxLaps + 1):
+			laps += 1
+		else:
+			if checkpointPassed:
+				if bestTime > timer:
+					bestTime = timer
+				timer = 0
+				laps = 1
 	if area.name == "PitstopArea":
 		inPit = true
 		print("entered Pit")
-
+	if area.name == "Checkpoint":
+		checkpointPassed = true
 	
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	#If exiting pit, setting it to false

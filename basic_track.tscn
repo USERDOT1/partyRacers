@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://jbvvpfdptouy"]
+[gd_scene load_steps=66 format=3 uid="uid://jbvvpfdptouy"]
 
 [ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
 [ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
@@ -200,6 +200,12 @@ size = Vector3(13, 4, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fen46"]
 size = Vector3(13.11, 8, 37.87)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj8fg"]
+size = Vector3(23.585, 3.935, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n21ll"]
+size = Vector3(26.155, 6.93, 1)
 
 [node name="BasicTrack" type="Node3D"]
 script = ExtResource("1_kfwyd")
@@ -948,6 +954,60 @@ shape = SubResource("BoxShape3D_xlphj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Curb46"]
 mesh = SubResource("BoxMesh_ijihe")
 
+[node name="Curb53" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.999915, 0, 0.0130722, 0, 1, 0, -0.0130722, 0, -0.999915, 45.5586, 0.571, 30.7473)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb53"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb53"]
+mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Curb56" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.999915, 0, 0.0130722, 0, 1, 0, -0.0130722, 0, -0.999915, 27.9873, 0.571, 30.7473)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb56"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb56"]
+mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Curb57" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.95347, 0, -0.301488, 0, 1, 0, 0.301488, 0, -0.95347, 28.5563, 0.571, 34.5836)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb57"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb57"]
+mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Curb58" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.95347, 0, -0.301488, 0, 1, 0, 0.301488, 0, -0.95347, 30.0345, 0.571, 39.1614)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb58"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb58"]
+mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Curb54" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.990719, 0, 0.135923, 0, 1, 0, -0.135923, 0, -0.990719, 45.2686, 0.571, 35.4834)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb54"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb54"]
+mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Curb55" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.944863, 0, 0.327465, 0, 1, 0, -0.327465, 0, -0.944863, 44.8956, 0.571, 37.0374)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Curb55"]
+shape = SubResource("BoxShape3D_xlphj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Curb55"]
+mesh = SubResource("BoxMesh_ijihe")
+
 [node name="Curb47" type="StaticBody3D" parent="."]
 transform = Transform3D(-0.561564, 0, 0.827434, 0, 1, 0, -0.827434, 0, -0.561564, 48.2076, 0.571, -68.8657)
 
@@ -965,3 +1025,15 @@ shape = SubResource("BoxShape3D_xlphj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Curb48"]
 mesh = SubResource("BoxMesh_ijihe")
+
+[node name="Finish" type="Area3D" parent="."]
+transform = Transform3D(0.892334, 0, -0.451376, 0, 1, 0, 0.451376, 0, 0.892334, 0, 2.06681, -63.5077)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Finish"]
+shape = SubResource("BoxShape3D_uj8fg")
+
+[node name="Checkpoint" type="Area3D" parent="."]
+transform = Transform3D(0.961425, 0, 0.275067, 0, 1, 0, -0.275067, 0, 0.961425, 114.369, 2.07702, -62.6711)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint"]
+shape = SubResource("BoxShape3D_n21ll")
