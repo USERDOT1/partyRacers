@@ -174,7 +174,7 @@ func areaEntered(area: Area3D) -> void:
 	#if area.name == "Start":
 	#	inTrack = true
 	if area.name == "Finish":
-		if laps != (get_parent().maxLaps + 1):
+		if laps != (get_parent().maxLaps):
 			laps += 1
 		else:
 			if checkpointPassed:
