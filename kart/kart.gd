@@ -38,6 +38,7 @@ var kartBaseFlipResistence = 0.1
 var maxSteering = 0.5
 
 var ourItems = []
+
 func _ready() -> void:
 	tireType = tireList[tireIndex]
 	$"../CanvasLayer/Hud".spending = spendingType
@@ -53,7 +54,8 @@ func _ready() -> void:
 	$BackRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackLeft.wheel_roll_influence = kartBaseFlipResistence
 func _physics_process(delta: float) -> void:
-	
+	spendingType = spendingList[spendingIndex]#Updates spendingtype every frame
+	$"../CanvasLayer/Hud".spending = spendingType
 	# If we are in the track, increase the timer
 	if inTrack:
 		timer += delta
@@ -93,24 +95,25 @@ func _physics_process(delta: float) -> void:
 		bonus = 1.2
 		if battery - (delta) > 0:
 			battery -= delta
-		elif battery <= 0: #adjusts battery back to balance
-			spendingType = "Balanced"
-			$"../CanvasLayer/Hud".spending = spendingType
+		else: #adjusts battery back to balance
+			spendingIndex = 3
+			
 	elif spendingType == "Big Spend":
 		bonus = 1.35
 		if battery - (1.3*delta) > 0:
 			battery -= 1.3*delta
-		elif battery <= 0:
-			spendingType = "Balanced"
-			$"../CanvasLayer/Hud".spending = spendingType
+		else: 
+			spendingIndex = 3
+			
 	elif spendingType == "Ultra Spend":
 		bonus = 1.5
 		if battery - (1.8*delta) > 0:
 			battery -= 1.8*delta
-		elif battery <= 0:
-			spendingType = "Balanced"
-			$"../CanvasLayer/Hud".spending = spendingType
+		else:
+			print('ELSE')
+			spendingIndex = 3
 			
+	
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	
