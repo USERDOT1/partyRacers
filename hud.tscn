@@ -1,27 +1,35 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3erjqtrfd8ws"]
+[gd_scene load_steps=11 format=3 uid="uid://c3erjqtrfd8ws"]
 
 [ext_resource type="Script" uid="uid://cdmph3y8s333" path="res://hud.gd" id="1_37p78"]
-[ext_resource type="Texture2D" uid="uid://bfffjb2xmk35u" path="res://textures/energySpendingSprite.png" id="2_64ctp"]
+[ext_resource type="Texture2D" uid="uid://dbut8742jqxc7" path="res://textures/energySpendingSprite.png" id="2_64ctp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64ctp"]
 atlas = ExtResource("2_64ctp")
-region = Rect2(14, 0, 7, 31)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_640wx"]
-atlas = ExtResource("2_64ctp")
-region = Rect2(7, 0, 7, 31)
+region = Rect2(24, 0, 8, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8sq4i"]
 atlas = ExtResource("2_64ctp")
-region = Rect2(0, 0, 7, 31)
+region = Rect2(8, 0, 8, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_640wx"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(40, 0, 8, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2258"]
 atlas = ExtResource("2_64ctp")
-region = Rect2(21, 0, 7, 31)
+region = Rect2(16, 0, 8, 43)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xsix"]
 atlas = ExtResource("2_64ctp")
-region = Rect2(28, 0, 7, 31)
+region = Rect2(32, 0, 8, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rftc2"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(0, 0, 8, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61f8s"]
+atlas = ExtResource("2_64ctp")
+region = Rect2(48, 0, 8, 43)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_61f8s"]
 animations = [{
@@ -35,18 +43,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_640wx")
+"texture": SubResource("AtlasTexture_8sq4i")
 }],
 "loop": true,
-"name": &"Recharge1",
+"name": &"BigRecharge",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8sq4i")
+"texture": SubResource("AtlasTexture_640wx")
 }],
 "loop": true,
-"name": &"Recharge2",
+"name": &"BigSpend",
 "speed": 5.0
 }, {
 "frames": [{
@@ -54,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_a2258")
 }],
 "loop": true,
-"name": &"Spend1",
+"name": &"Recharge",
 "speed": 5.0
 }, {
 "frames": [{
@@ -62,7 +70,23 @@ animations = [{
 "texture": SubResource("AtlasTexture_1xsix")
 }],
 "loop": true,
-"name": &"Spend2",
+"name": &"Spend",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rftc2")
+}],
+"loop": true,
+"name": &"UltraRecharge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61f8s")
+}],
+"loop": true,
+"name": &"UltraSpend",
 "speed": 5.0
 }]
 
@@ -138,4 +162,4 @@ text = "In Pit
 position = Vector2(1094, 283)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_61f8s")
-animation = &"Balanced"
+animation = &"BigRecharge"

@@ -4,19 +4,19 @@ var spending = "balanced"
 func _process(delta: float) -> void:
 	#print(spending)
 	if spending == "Ultra Recharge":
-		$Lights.animation = "Recharge2"
+		$Lights.animation = "UltraRecharge"
 	elif spending == "Big Recharge":
-		$Lights.animation = "Recharge1"
+		$Lights.animation = "BigRecharge"
 	elif spending == "Recharge":
-		$Lights.animation = "Recharge1"
+		$Lights.animation = "Recharge"
 	elif spending == "Balanced":
 		$Lights.animation = "Balanced"
 	elif spending == "Spend":
-		$Lights.animation = "Spend1"
+		$Lights.animation = "Spend"
 	elif spending == "Big Spend":
-		$Lights.animation = "Spend1"
+		$Lights.animation = "BigSpend"
 	elif spending == "Ultra Spend":
-		$Lights.animation = "Spend2"
+		$Lights.animation = "UltraSpend"
 	$Timer.text = "Current Time: " + str(round_place(get_parent().get_parent().kart.timer,3))
 	$BestTime.text = "Best Time: " + str(round_place(get_parent().get_parent().kart.bestTime,3))
 	
