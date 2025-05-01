@@ -163,3 +163,11 @@ position = Vector2(1094, 283)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_61f8s")
 animation = &"BigRecharge"
+
+[node name="ResetText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 279.0
+offset_right = 652.0
+offset_bottom = 302.0
+text = "(Press R to reset)"

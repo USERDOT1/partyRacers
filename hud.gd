@@ -20,6 +20,13 @@ func _process(delta: float) -> void:
 	$Timer.text = "Current Time: " + str(round_place(get_parent().get_parent().kart.timer,3))
 	$BestTime.text = "Best Time: " + str(round_place(get_parent().get_parent().kart.bestTime,3))
 	
+	#Instead of using a if statement used this cool thing that speaks for itself
+	$ResetText.visible = get_parent().get_parent().kart.flipped
+		
+	
+	
+	
+	
 	$Laps.text = "Lap " + str(get_parent().get_parent().kart.laps) + "/" + str(get_parent().get_parent().maxLaps)
 	
 	$TireCondition.text = "Tire Condition: " + str(roundi(get_parent().get_parent().kart.tireCondition*1000))
