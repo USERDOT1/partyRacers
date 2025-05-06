@@ -1,10 +1,9 @@
-[gd_scene load_steps=70 format=3 uid="uid://jbvvpfdptouy"]
+[gd_scene load_steps=68 format=3 uid="uid://jbvvpfdptouy"]
 
 [ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
 [ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
 [ext_resource type="Texture2D" uid="uid://dpuastx8oc8gh" path="res://textures/GrassTextureGood.jpg" id="2_kfwyd"]
 [ext_resource type="PackedScene" uid="uid://bney1s5re8mc8" path="res://kart/kart.tscn" id="2_s41hh"]
-[ext_resource type="PackedScene" uid="uid://c3erjqtrfd8ws" path="res://hud.tscn" id="3_s41hh"]
 [ext_resource type="PackedScene" uid="uid://l2v77imjmpif" path="res://itemBox/item_box.tscn" id="4_adgoi"]
 [ext_resource type="Material" uid="uid://c5w4e1rktr60w" path="res://materials/basic_track.tres" id="7_8q44g"]
 [ext_resource type="PhysicsMaterial" uid="uid://bls8c3od56n60" path="res://materials/physics/trackPhysics.tres" id="7_depfd"]
@@ -208,9 +207,6 @@ size = Vector3(23.585, 3.935, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_n21ll"]
 size = Vector3(26.155, 6.93, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m3f5x"]
-size = Vector3(19.705, 1, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6k3nd"]
 albedo_texture = ExtResource("11_3csay")
 uv1_scale = Vector3(16.495, 4, 1)
@@ -246,8 +242,6 @@ center_of_mass_mode = 1
 can_sleep = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("3_s41hh")]
 
 [node name="TrackStartingStraight" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495894, 0)
@@ -1053,8 +1047,6 @@ shape = SubResource("BoxShape3D_n21ll")
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.817321, 0.0196381, -40.5027)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-shape = SubResource("BoxShape3D_m3f5x")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0206403, 0)
 mesh = SubResource("BoxMesh_c78y6")

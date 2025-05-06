@@ -11,11 +11,11 @@ var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
 var tireIndex = 1
 
-@export var itemList = ["boost","phase","amogus"]
+@export var itemList = ["Boost","Phase"]
 
 var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
-var hardDegDiv = 60 #Hard Tire Degs 
+var hardDegDiv = 100 #Hard Tire Degs 
 
 var battery = 30
 var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "Spend", "Big Spend", "Ultra Spend"]
@@ -39,15 +39,20 @@ var maxSteering = 0.5
 
 var ourItems = []
 
-var laps = 1
+var laps = 0
 
 var checkpointPassed = false
 
 
 var flipped = false
+
+var boostValue = 0
+
+var boostFalloff = 150
+
 func _ready() -> void:
 	tireType = tireList[tireIndex]
-	$"../CanvasLayer/Hud".spending = spendingType
+	$Camera3D/Hud.spending = spendingType
 	#Setting wheel friction to a variable
 	$FrontLeft.wheel_friction_slip = kartBaseFriction
 	$FrontRight.wheel_friction_slip = kartBaseFriction
@@ -60,8 +65,16 @@ func _ready() -> void:
 	$BackRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackLeft.wheel_roll_influence = kartBaseFlipResistence
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("usePowerup"):
+		usePowerup()
+	if (boostValue - boostFalloff*delta) > 0:
+		boostValue -= boostFalloff*delta
+	else:
+		boostValue = 0
+	if Input.is_action_just_pressed("usePowerup"):
+		pass
 	spendingType = spendingList[spendingIndex]#Updates spendingtype every frame
-	$"../CanvasLayer/Hud".spending = spendingType
+	$Camera3D/Hud.spending = spendingType
 	# If we are in the track, increase the timer
 	if inTrack:
 		timer += delta
@@ -73,7 +86,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex + 1) 
 			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud".spending = spendingType
+			$Camera3D/Hud.spending = spendingType
 			#print(spendingType)
 	if Input.is_action_just_pressed("ChangeBatteryDown"):
 		if spendingIndex == 0:
@@ -81,7 +94,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex - 1) 
 			spendingType = spendingList[spendingIndex]
-			$"../CanvasLayer/Hud".spending = spendingType
+			$Camera3D/Hud.spending = spendingType
 			#print(spendingType)
 	
 	# Subject to change in the future from a multiplyer to an addative
@@ -125,7 +138,7 @@ func _physics_process(delta: float) -> void:
 	
 	#Steering based on the tireCondition, maxing out at maxSteering
 	steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
-	engine_force = Input.get_axis("break","throttle") * baseEnginePower * bonus
+	engine_force = Input.get_axis("break","throttle") * (baseEnginePower + boostValue)* bonus
 	
 	# Degrading tire condition based on above variables
 	if tireType == "Soft":
@@ -176,6 +189,12 @@ func powerup():
 		#if we have less than 3 items add another
 		ourItems.append(itemList.pick_random())
 		print(ourItems)
+		
+func usePowerup():
+	if len(ourItems) > 0:
+		if ourItems[0] == "Boost":
+			boostValue += 500
+		ourItems.remove_at(0)
 		
 
 
