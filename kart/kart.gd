@@ -22,6 +22,7 @@ var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "S
 var spendingIndex = 3
 var spendingType = spendingList[spendingIndex]
 
+var can_accelerate = true
 
 var bonus = 1
 
@@ -30,8 +31,10 @@ var bestTime = 1000
 var inTrack = true
 var identification = "kart"
 
+var playerDirectionF 
 
-var oogaBonus = 0
+
+
 
 var kartBaseFriction = 10.5
 var kartBaseFlipResistence = 0.1
@@ -65,6 +68,7 @@ func _ready() -> void:
 	$BackRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackLeft.wheel_roll_influence = kartBaseFlipResistence
 func _physics_process(delta: float) -> void:
+	playerDirectionF = global_transform.basis.z.normalized()
 	if Input.is_action_just_pressed("usePowerup"):
 		usePowerup()
 	if (boostValue - boostFalloff*delta) > 0:
@@ -136,9 +140,11 @@ func _physics_process(delta: float) -> void:
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	
-	#Steering based on the tireCondition, maxing out at maxSteering
-	steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
-	engine_force = Input.get_axis("break","throttle") * (baseEnginePower + boostValue)* bonus
+	if can_accelerate:
+		#Steering based on the tireCondition, maxing out at maxSteering
+		steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
+		engine_force = Input.get_axis("break","throttle") * (baseEnginePower + boostValue)* bonus
+	
 	
 	# Degrading tire condition based on above variables
 	if tireType == "Soft":
@@ -193,7 +199,17 @@ func powerup():
 func usePowerup():
 	if len(ourItems) > 0:
 		if ourItems[0] == "Boost":
-			boostValue += 500
+			apply_central_impulse(playerDirectionF * 500)
+		
+		if ourItems[0] == "Phase":
+			# wait 2 seconds
+			visible = false
+			can_accelerate = false
+			await get_tree().create_timer(.15).timeout
+			global_position += playerDirectionF * 10
+			await get_tree().create_timer(.25).timeout
+			can_accelerate = true
+			visible = true
 		ourItems.remove_at(0)
 		
 
