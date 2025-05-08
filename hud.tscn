@@ -188,6 +188,18 @@ offset_bottom = 79.0
 text = "In Pit
 (Use left and right arrows to switch tires)"
 
+[node name="StartCountdown" type="Label" parent="."]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 23.0
+offset_right = 633.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Lights" type="AnimatedSprite2D" parent="."]
 position = Vector2(1094, 283)
 scale = Vector2(5, 5)

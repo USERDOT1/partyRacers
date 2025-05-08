@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bney1s5re8mc8"]
+[gd_scene load_steps=18 format=3 uid="uid://bney1s5re8mc8"]
 
 [ext_resource type="Script" uid="uid://4nxtuh37kl6y" path="res://kart/kart.gd" id="1_souiu"]
 [ext_resource type="Texture2D" uid="uid://bm08yb411rgud" path="res://textures/car-tires.png" id="2_co00p"]
 [ext_resource type="Texture2D" uid="uid://bthivhuv27ofu" path="res://textures/Epic_BlueSunset_EquiRect_flat.png" id="3_co00p"]
-[ext_resource type="PackedScene" uid="uid://c3erjqtrfd8ws" path="res://hud.tscn" id="4_bv6v8"]
 [ext_resource type="AudioStream" uid="uid://cn3sto0eew6bm" path="res://teleport.wav" id="5_lt3ne"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okf4r"]
@@ -121,8 +120,6 @@ shape = SubResource("CapsuleShape3D_x5vpf")
 transform = Transform3D(-1, 8.74228e-08, 0, 7.80976e-08, 0.893332, 0.449397, 3.92875e-08, 0.449397, -0.893332, 0, 3.978, -5.992)
 environment = SubResource("Environment_b12jd")
 far = 12000.0
-
-[node name="Hud" parent="Camera3D" instance=ExtResource("4_bv6v8")]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_lt3ne")

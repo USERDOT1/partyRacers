@@ -1,7 +1,8 @@
-[gd_scene load_steps=68 format=3 uid="uid://jbvvpfdptouy"]
+[gd_scene load_steps=69 format=3 uid="uid://jbvvpfdptouy"]
 
 [ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
 [ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
+[ext_resource type="PackedScene" uid="uid://c3erjqtrfd8ws" path="res://hud.tscn" id="2_3csay"]
 [ext_resource type="Texture2D" uid="uid://dpuastx8oc8gh" path="res://textures/GrassTextureGood.jpg" id="2_kfwyd"]
 [ext_resource type="PackedScene" uid="uid://bney1s5re8mc8" path="res://kart/kart.tscn" id="2_s41hh"]
 [ext_resource type="PackedScene" uid="uid://l2v77imjmpif" path="res://itemBox/item_box.tscn" id="4_adgoi"]
@@ -217,6 +218,8 @@ size = Vector3(24.3, 1, 5.4)
 
 [node name="BasicTrack" type="Node3D"]
 script = ExtResource("1_kfwyd")
+
+[node name="Hud" parent="." instance=ExtResource("2_3csay")]
 
 [node name="ItemBoxSpawn" parent="." instance=ExtResource("4_adgoi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.362298, 1, -8.57478)

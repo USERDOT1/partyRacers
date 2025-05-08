@@ -22,7 +22,9 @@ var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "S
 var spendingIndex = 3
 var spendingType = spendingList[spendingIndex]
 
-var can_accelerate = true
+var phazed = false
+
+
 
 var bonus = 1
 
@@ -53,9 +55,12 @@ var boostFalloff = 150
 
 var boostPower = 500
 var phaseDistance = 30
+func _init() -> void:
+	GlobalVars.kart = self
 func _ready() -> void:
+	
 	tireType = tireList[tireIndex]
-	$Camera3D/Hud.spending = spendingType
+	GlobalVars.hud.spending = spendingType
 	#Setting wheel friction to a variable
 	$FrontLeft.wheel_friction_slip = kartBaseFriction
 	$FrontRight.wheel_friction_slip = kartBaseFriction
@@ -74,9 +79,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("usePowerup"):
 		pass
 	spendingType = spendingList[spendingIndex]#Updates spendingtype every frame
-	$Camera3D/Hud.spending = spendingType
+	GlobalVars.hud.spending = spendingType
 	# If we are in the track, increase the timer
-	if inTrack:
+	if inTrack and get_parent().raceStart:
 		timer += delta
 	
 	#Hotkeys for Changing Battery
@@ -136,10 +141,11 @@ func _physics_process(delta: float) -> void:
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	
-	if can_accelerate:
-		#Steering based on the tireCondition, maxing out at maxSteering
-		steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
-		engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
+	if get_parent().raceStart:
+		if not phazed:
+			#Steering based on the tireCondition, maxing out at maxSteering
+			steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
+			engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
 	
 	
 	# Degrading tire condition based on above variables
@@ -203,13 +209,13 @@ func usePowerup():
 			# wait 2 seconds
 			
 			visible = false
-			can_accelerate = false
+			phazed = false
 			$AudioStreamPlayer3D.play()
 			await get_tree().create_timer(.15).timeout
 			global_position += playerDirectionF * phaseDistance
 			
 			await get_tree().create_timer(.25).timeout
-			can_accelerate = true
+			phazed = true
 			visible = true
 		ourItems.remove_at(0)
 		
