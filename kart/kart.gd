@@ -49,10 +49,10 @@ var checkpointPassed = false
 
 var flipped = false
 
-var boostValue = 0
-
 var boostFalloff = 150
 
+var boostPower = 500
+var phaseDistance = 30
 func _ready() -> void:
 	tireType = tireList[tireIndex]
 	$Camera3D/Hud.spending = spendingType
@@ -71,10 +71,6 @@ func _physics_process(delta: float) -> void:
 	playerDirectionF = global_transform.basis.z.normalized()
 	if Input.is_action_just_pressed("usePowerup"):
 		usePowerup()
-	if (boostValue - boostFalloff*delta) > 0:
-		boostValue -= boostFalloff*delta
-	else:
-		boostValue = 0
 	if Input.is_action_just_pressed("usePowerup"):
 		pass
 	spendingType = spendingList[spendingIndex]#Updates spendingtype every frame
@@ -143,7 +139,7 @@ func _physics_process(delta: float) -> void:
 	if can_accelerate:
 		#Steering based on the tireCondition, maxing out at maxSteering
 		steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
-		engine_force = Input.get_axis("break","throttle") * (baseEnginePower + boostValue)* bonus
+		engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
 	
 	
 	# Degrading tire condition based on above variables
@@ -162,6 +158,8 @@ func _physics_process(delta: float) -> void:
 			rotation_degrees.x = 0
 			rotation_degrees.z = 0
 			position.y += 5
+			angular_velocity = Vector3(0,0,0)
+			linear_velocity = Vector3(0,0,0)
 	else:
 		flipped = false
 		
@@ -199,14 +197,17 @@ func powerup():
 func usePowerup():
 	if len(ourItems) > 0:
 		if ourItems[0] == "Boost":
-			apply_central_impulse(playerDirectionF * 500)
+			apply_central_impulse(playerDirectionF * boostPower)
 		
 		if ourItems[0] == "Phase":
 			# wait 2 seconds
+			
 			visible = false
 			can_accelerate = false
+			$AudioStreamPlayer3D.play()
 			await get_tree().create_timer(.15).timeout
-			global_position += playerDirectionF * 10
+			global_position += playerDirectionF * phaseDistance
+			
 			await get_tree().create_timer(.25).timeout
 			can_accelerate = true
 			visible = true
