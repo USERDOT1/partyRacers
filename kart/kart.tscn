@@ -1,15 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://bney1s5re8mc8"]
+[gd_scene load_steps=19 format=3 uid="uid://bney1s5re8mc8"]
 
 [ext_resource type="Script" uid="uid://4nxtuh37kl6y" path="res://kart/kart.gd" id="1_souiu"]
 [ext_resource type="Texture2D" uid="uid://bm08yb411rgud" path="res://textures/car-tires.png" id="2_co00p"]
+[ext_resource type="Material" uid="uid://bnie3l0n8imik" path="res://materials/redKart.tres" id="2_lt3ne"]
 [ext_resource type="Texture2D" uid="uid://bthivhuv27ofu" path="res://textures/Epic_BlueSunset_EquiRect_flat.png" id="3_co00p"]
 [ext_resource type="AudioStream" uid="uid://cn3sto0eew6bm" path="res://teleport.wav" id="5_lt3ne"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okf4r"]
-albedo_color = Color(1, 0, 0, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_782t0"]
-material = SubResource("StandardMaterial3D_okf4r")
+material = ExtResource("2_lt3ne")
 size = Vector3(1, 0.36, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_782t0"]
@@ -50,6 +48,14 @@ sky_material = SubResource("PanoramaSkyMaterial_bv6v8")
 background_mode = 2
 sky = SubResource("Sky_lt3ne")
 glow_enabled = true
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bv6v8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Kart" type="VehicleBody3D"]
 script = ExtResource("1_souiu")
@@ -116,7 +122,7 @@ skeleton = NodePath("../../FrontLeft")
 transform = Transform3D(1, 0, 0, 0, -0.0338006, -0.999429, 0, 0.999429, -0.0338006, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_x5vpf")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Playercam" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, 7.80976e-08, 0.893332, 0.449397, 3.92875e-08, 0.449397, -0.893332, 0, 3.978, -5.992)
 environment = SubResource("Environment_b12jd")
 far = 12000.0
@@ -124,6 +130,9 @@ far = 12000.0
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_lt3ne")
 bus = &"SoundEffects"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_bv6v8")
 
 [connection signal="area_entered" from="Area3D" to="." method="areaEntered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://qgg1y7tg1xfk"]
+
+[ext_resource type="PackedScene" uid="uid://jbvvpfdptouy" path="res://basic_track.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://ooj8gpkbhnrn" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c3erjqtrfd8ws" path="res://hud.tscn" id="3_feb5d"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_fc0e3")
+
+[node name="BasicTrack" parent="." instance=ExtResource("1_e2o6t")]
+
+[node name="Hud" parent="." instance=ExtResource("3_feb5d")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bney1s5re8mc8")
+spawn_path = NodePath("..")

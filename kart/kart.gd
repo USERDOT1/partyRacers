@@ -55,8 +55,7 @@ var boostFalloff = 150
 
 var boostPower = 500
 var phaseDistance = 30
-func _init() -> void:
-	GlobalVars.kart = self
+
 func _ready() -> void:
 	
 	tireType = tireList[tireIndex]
@@ -72,7 +71,25 @@ func _ready() -> void:
 	$FrontRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackRight.wheel_roll_influence = kartBaseFlipResistence
 	$BackLeft.wheel_roll_influence = kartBaseFlipResistence
+	
+func _enter_tree() -> void:
+	set_multiplayer_authority(int(name))
+	if is_multiplayer_authority():
+		
+		GlobalVars.kart = self
+	
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		if $Playercam.is_current():
+			$Playercam.clear_current()
+		$CarBody.material_override = load("res://materials/blueKart.tres")
+		return
+	else:
+		print("call me ("+name+") the goat")
+		GlobalVars.kart = self
+	
+	
+	
 	playerDirectionF = global_transform.basis.z.normalized()
 	if Input.is_action_just_pressed("usePowerup"):
 		usePowerup()
@@ -81,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	spendingType = spendingList[spendingIndex]#Updates spendingtype every frame
 	GlobalVars.hud.spending = spendingType
 	# If we are in the track, increase the timer
-	if inTrack and get_parent().raceStart:
+	if inTrack and GlobalVars.currentTrack.raceStart:
 		timer += delta
 	
 	#Hotkeys for Changing Battery
@@ -91,7 +108,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex + 1) 
 			spendingType = spendingList[spendingIndex]
-			$Camera3D/Hud.spending = spendingType
+			GlobalVars.hud.spending = spendingType
 			#print(spendingType)
 	if Input.is_action_just_pressed("ChangeBatteryDown"):
 		if spendingIndex == 0:
@@ -99,7 +116,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			spendingIndex = (spendingIndex - 1) 
 			spendingType = spendingList[spendingIndex]
-			$Camera3D/Hud.spending = spendingType
+			GlobalVars.hud.spending = spendingType
 			#print(spendingType)
 	
 	# Subject to change in the future from a multiplyer to an addative
@@ -141,7 +158,8 @@ func _physics_process(delta: float) -> void:
 	#Clamp battery
 	battery = clamp(battery,0,maxBattery)
 	
-	if get_parent().raceStart:
+	if GlobalVars.currentTrack.raceStart:
+		#print("racestart")
 		if not phazed:
 			#Steering based on the tireCondition, maxing out at maxSteering
 			steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
@@ -209,13 +227,13 @@ func usePowerup():
 			# wait 2 seconds
 			
 			visible = false
-			phazed = false
+			phazed = true
 			$AudioStreamPlayer3D.play()
 			await get_tree().create_timer(.15).timeout
 			global_position += playerDirectionF * phaseDistance
 			
 			await get_tree().create_timer(.25).timeout
-			phazed = true
+			phazed = false
 			visible = true
 		ourItems.remove_at(0)
 		
@@ -226,7 +244,7 @@ func areaEntered(area: Area3D) -> void:
 	#if area.name == "Start":
 	#	inTrack = true
 	if area.name == "Finish":
-		if laps != (get_parent().maxLaps):
+		if laps != (GlobalVars.currentTrack.maxLaps):
 			laps += 1
 		else:
 			if checkpointPassed:
