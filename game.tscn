@@ -8,6 +8,7 @@
 script = ExtResource("1_fc0e3")
 
 [node name="BasicTrack" parent="." instance=ExtResource("1_e2o6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.11113, 54.3922)
 
 [node name="Hud" parent="." instance=ExtResource("3_feb5d")]
 
