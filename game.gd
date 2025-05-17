@@ -4,7 +4,7 @@ var peer = ENetMultiplayerPeer.new()
 const playerKart = preload("res://kart/kart.tscn")
 
 func hostGame():
-	peer.create_server(8910,2)
+	peer.create_server(8910,5)
 	
 	multiplayer.multiplayer_peer = peer
 	 
@@ -19,7 +19,7 @@ func hostGame():
 	GlobalVars.gameHosted = true
 	
 func joinGame():
-	peer.create_client("172.88.97.9",8910,2)
+	peer.create_client("172.88.97.9",8910,5)
 	multiplayer.multiplayer_peer = peer
 
 func add_player(playerName):
