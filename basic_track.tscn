@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://jbvvpfdptouy"]
+[gd_scene load_steps=69 format=3 uid="uid://jbvvpfdptouy"]
 
 [ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
 [ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
@@ -161,6 +161,12 @@ size = Vector3(1, 2.5, 30)
 [sub_resource type="BoxMesh" id="BoxMesh_l2syy"]
 material = ExtResource("8_8q44g")
 size = Vector3(1, 2.5, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n21ll"]
+size = Vector3(16.5, 1.6, 8.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3f5x"]
+size = Vector3(16.5, 1.6, 8.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xlphj"]
 size = Vector3(1, 2.5, 5)
@@ -612,6 +618,15 @@ shape = SubResource("BoxShape3D_xc5tp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Curb10"]
 mesh = SubResource("BoxMesh_l2syy")
+
+[node name="RamptoPit" type="StaticBody3D" parent="."]
+transform = Transform3D(0.849373, -0.0884858, -0.520322, 0.116122, 0.993019, 0.0206843, 0.51486, -0.0779894, 0.853719, 82.1548, 0.571, -0.484345)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RamptoPit"]
+mesh = SubResource("BoxMesh_n21ll")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RamptoPit"]
+shape = SubResource("BoxShape3D_m3f5x")
 
 [node name="Curb11" type="StaticBody3D" parent="."]
 transform = Transform3D(0.839677, 0, -0.543086, 0, 1, 0, 0.543086, 0, 0.839677, 91.4061, 0.571, -0.484345)
