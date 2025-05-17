@@ -229,7 +229,7 @@ func usePowerup():
 			visible = false
 			phazed = true
 			$AudioStreamPlayer3D.play()
-			await get_tree().create_timer(.15).timeout
+			await get_tree().create_timer(.05).timeout
 			global_position += playerDirectionF * phaseDistance
 			
 			await get_tree().create_timer(.25).timeout
