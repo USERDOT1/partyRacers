@@ -80,11 +80,10 @@ func _enter_tree() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
-		if $Playercam.is_current():
-			$Playercam.clear_current()
 		$CarBody.material_override = load("res://materials/blueKart.tres")
 		return
 	else:
+		$Playercam.make_current()
 		print("call me ("+name+") the goat")
 		GlobalVars.kart = self
 	
