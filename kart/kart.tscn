@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bney1s5re8mc8"]
+[gd_scene load_steps=22 format=3 uid="uid://bney1s5re8mc8"]
 
 [ext_resource type="Script" uid="uid://4nxtuh37kl6y" path="res://kart/kart.gd" id="1_souiu"]
 [ext_resource type="Texture2D" uid="uid://bm08yb411rgud" path="res://textures/car-tires.png" id="2_co00p"]
@@ -57,9 +57,23 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lt3ne"]
+albedo_color = Color(0, 0.65098, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lt3ne"]
+material = SubResource("StandardMaterial3D_lt3ne")
+top_radius = 0.25
+height = 15.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lt3ne"]
+height = 14.7246
+
 [node name="Kart" type="VehicleBody3D"]
 script = ExtResource("1_souiu")
+baseEnginePower = null
 turnSpeed = 1
+tireCondition = null
+itemList = null
 
 [node name="CarBody" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_782t0")
@@ -133,6 +147,16 @@ bus = &"SoundEffects"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bv6v8")
+
+[node name="freezeBeam" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -0.000689409, 0.5, 0, -0.5, -0.000689409, 0, 0, 4.70471)
+mesh = SubResource("CylinderMesh_lt3ne")
+
+[node name="Area3D" type="Area3D" parent="freezeBeam"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="freezeBeam/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.171876, -1.86265e-09)
+shape = SubResource("CylinderShape3D_lt3ne")
 
 [connection signal="area_entered" from="Area3D" to="." method="areaEntered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

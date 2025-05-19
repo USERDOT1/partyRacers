@@ -11,7 +11,7 @@ var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
 var tireIndex = 1
 
-@export var itemList = ["Boost","Phase"]
+@export var itemList = ["Boost","Phase", "Freeze"]
 
 var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
@@ -24,7 +24,7 @@ var spendingType = spendingList[spendingIndex]
 
 var phazed = false
 
-
+var contact_monitor = false #for freeze detection
 
 var bonus = 1
 
@@ -57,7 +57,8 @@ var boostPower = 500
 var phaseDistance = 30
 
 func _ready() -> void:
-	
+	$freezeBeam.visible = true
+	$freezeBeam/Area3D/CollisionShape3D.disabled = false
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
 	#Setting wheel friction to a variable
@@ -236,6 +237,10 @@ func usePowerup():
 			visible = true
 		ourItems.remove_at(0)
 		
+		if ourItems[0] == "Freeze":
+			$freezeBeam.visible = true
+			$freezeBeam/Area3D/CollisionShape3D.disabled = false 
+			
 
 
 func areaEntered(area: Area3D) -> void:
