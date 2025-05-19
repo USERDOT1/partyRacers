@@ -19,7 +19,7 @@ func hostGame():
 	GlobalVars.gameHosted = true
 	
 func joinGame():
-	peer.create_client("partyracers.duckdns.org",8910,5)
+	peer.create_client("play.partyracers.com",8910,5)
 	multiplayer.multiplayer_peer = peer
 
 func add_player(playerName):
