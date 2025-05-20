@@ -4,7 +4,7 @@ extends VehicleBody3D
 @export var turnSpeed = 6
 @export var tireCondition = 1.2
 var maxBattery = 60
-
+var pastTurn = turnSpeed
 var inPit = false
 var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
@@ -24,7 +24,7 @@ var spendingType = spendingList[spendingIndex]
 var phazed = false
 
 var freezeInstance #for freeze
-
+var freezeHit = false
 
 var bonus = 1
 
@@ -238,6 +238,10 @@ func usePowerup():
 		elif ourItems[0] == "Freeze":
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
+			if freezeHit == true:
+				turnSpeed = 0
+				await get_tree().create_timer(2).timeout
+				turnSpeed = pastTurn
 			
 			
 			
@@ -281,3 +285,5 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		print("exited Pit")
 	elif area.name == "freezeArea":
 		print('HIT')
+		freezeHit = true
+		pastTurn = turnSpeed
