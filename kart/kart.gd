@@ -24,7 +24,7 @@ var spendingType = spendingList[spendingIndex]
 
 var phazed = false
 
-var contact_monitor = false #for freeze detection
+var freezeBox = false #for freeze detection
 
 var bonus = 1
 
@@ -57,7 +57,7 @@ var boostPower = 500
 var phaseDistance = 30
 
 func _ready() -> void:
-	$freezeBeam.visible = true
+	$freezeBeam.visible = false
 	$freezeBeam/Area3D/CollisionShape3D.disabled = false
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
@@ -235,11 +235,24 @@ func usePowerup():
 			await get_tree().create_timer(.25).timeout
 			phazed = false
 			visible = true
-		ourItems.remove_at(0)
 		
 		if ourItems[0] == "Freeze":
 			$freezeBeam.visible = true
-			$freezeBeam/Area3D/CollisionShape3D.disabled = false 
+			$freezeBeam/Area3D/CollisionShape3D.disabled = false
+			if freezeBox == true:
+				
+			
+	 
+		
+		
+		
+		
+		
+		#PUT ALL ITEM CODE ABOVE HERE
+		
+		ourItems.remove_at(0)
+		
+		 
 			
 
 
@@ -267,3 +280,6 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 	if area.name == "PitstopArea":
 		inPit = false
 		print("exited Pit")
+	elif area.name == "freezeArea":
+		freezeBox = true
+		print('HIT')

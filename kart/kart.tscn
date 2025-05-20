@@ -152,11 +152,12 @@ replication_config = SubResource("SceneReplicationConfig_bv6v8")
 transform = Transform3D(0.5, 0, 0, 0, -0.000689409, 0.5, 0, -0.5, -0.000689409, 0, 0, 4.70471)
 mesh = SubResource("CylinderMesh_lt3ne")
 
-[node name="Area3D" type="Area3D" parent="freezeBeam"]
+[node name="freezeArea" type="Area3D" parent="freezeBeam"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="freezeBeam/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="freezeBeam/freezeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.171876, -1.86265e-09)
 shape = SubResource("CylinderShape3D_lt3ne")
 
 [connection signal="area_entered" from="Area3D" to="." method="areaEntered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="area_entered" from="freezeBeam/freezeArea" to="." method="freezeBeam_entered"]
