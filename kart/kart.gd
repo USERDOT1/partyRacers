@@ -1,6 +1,5 @@
 extends VehicleBody3D
 
-
 @export var baseEnginePower = 300
 @export var turnSpeed = 6
 @export var tireCondition = 1.2
@@ -24,7 +23,8 @@ var spendingType = spendingList[spendingIndex]
 
 var phazed = false
 
-var freezeBox = false #for freeze detection
+var freezeInstance #for freeze
+
 
 var bonus = 1
 
@@ -57,8 +57,7 @@ var boostPower = 500
 var phaseDistance = 30
 
 func _ready() -> void:
-	$freezeBeam.visible = false
-	$freezeBeam/freezeArea/CollisionShape3D.disabled = false
+	
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
 	#Setting wheel friction to a variable
@@ -85,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		return
 	else:
 		$Playercam.make_current()
-		print("call me ("+name+") the goat")
+		
 		GlobalVars.kart = self
 	
 	
@@ -237,10 +236,9 @@ func usePowerup():
 			visible = true
 		
 		if ourItems[0] == "Freeze":
-			$freezeBeam.visible = true
-			$freezeBeam/freezeArea/CollisionShape3D.disabled = false
-			if freezeBox == true:
-				print ('Fiend')
+			freezeInstance = load("res://freeze_beam.tscn").instantiate()
+			add_child(freezeInstance)
+			
 				
 			
 	 
@@ -282,5 +280,4 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		inPit = false
 		print("exited Pit")
 	elif area.name == "freezeArea":
-		freezeBox = true
 		print('HIT')
