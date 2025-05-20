@@ -58,7 +58,7 @@ var phaseDistance = 30
 
 func _ready() -> void:
 	$freezeBeam.visible = false
-	$freezeBeam/Area3D/CollisionShape3D.disabled = false
+	$freezeBeam/freezeArea/CollisionShape3D.disabled = false
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
 	#Setting wheel friction to a variable
@@ -238,7 +238,7 @@ func usePowerup():
 		
 		if ourItems[0] == "Freeze":
 			$freezeBeam.visible = true
-			$freezeBeam/Area3D/CollisionShape3D.disabled = false
+			$freezeBeam/freezeArea/CollisionShape3D.disabled = false
 			if freezeBox == true:
 				print ('Fiend')
 				
