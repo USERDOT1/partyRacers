@@ -240,6 +240,7 @@ func usePowerup():
 			$freezeBeam.visible = true
 			$freezeBeam/Area3D/CollisionShape3D.disabled = false
 			if freezeBox == true:
+				print ('Fiend')
 				
 			
 	 
