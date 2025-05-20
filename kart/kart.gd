@@ -4,7 +4,10 @@ extends VehicleBody3D
 @export var turnSpeed = 6
 @export var tireCondition = 1.2
 var maxBattery = 60
-var pastTurn = turnSpeed
+
+var cold_mod = 1
+var cold_recovery = 0.1
+
 var inPit = false
 var tireType = "Medium"
 var tireList = ["Soft", "Medium", "Hard"]
@@ -24,7 +27,7 @@ var spendingType = spendingList[spendingIndex]
 var phazed = false
 
 var freezeInstance #for freeze
-var freezeHit = false
+
 
 var bonus = 1
 
@@ -87,7 +90,10 @@ func _physics_process(delta: float) -> void:
 		
 		GlobalVars.kart = self
 	
-	
+	if (cold_mod + delta * cold_recovery) < 1:
+		cold_mod += delta * cold_recovery 
+	else:
+		cold_mod = 1
 	
 	playerDirectionF = global_transform.basis.z.normalized()
 	if Input.is_action_just_pressed("usePowerup"):
@@ -161,7 +167,7 @@ func _physics_process(delta: float) -> void:
 		#print("racestart")
 		if not phazed:
 			#Steering based on the tireCondition, maxing out at maxSteering
-			steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition)
+			steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition * cold_mod)
 			engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
 	
 	
@@ -238,10 +244,8 @@ func usePowerup():
 		elif ourItems[0] == "Freeze":
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
-			if freezeHit == true:
-				turnSpeed = 0
-				await get_tree().create_timer(2).timeout
-				turnSpeed = pastTurn
+			
+				
 			
 			
 			
@@ -285,5 +289,5 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		print("exited Pit")
 	elif area.name == "freezeArea":
 		print('HIT')
-		freezeHit = true
-		pastTurn = turnSpeed
+		cold_mod = 0.2
+		
