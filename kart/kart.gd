@@ -57,7 +57,7 @@ var flipped = false
 var boostFalloff = 150
 
 var boostPower = 500
-var phaseDistance = 30
+var phaseDistance = 18
 
 func _ready() -> void:
 	
