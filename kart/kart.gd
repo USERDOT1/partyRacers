@@ -289,5 +289,5 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		print("exited Pit")
 	elif area.name == "freezeArea":
 		print('HIT')
-		cold_mod = 0.2
+		cold_mod = 0.1
 		
