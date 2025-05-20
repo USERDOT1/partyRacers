@@ -131,6 +131,9 @@ far = 12000.0
 stream = ExtResource("5_lt3ne")
 bus = &"SoundEffects"
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bv6v8")
 
