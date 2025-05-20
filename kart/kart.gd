@@ -222,7 +222,7 @@ func usePowerup():
 		if ourItems[0] == "Boost":
 			apply_central_impulse(playerDirectionF * boostPower)
 		
-		if ourItems[0] == "Phase":
+		elif ourItems[0] == "Phase":
 			# wait 2 seconds
 			
 			visible = false
@@ -235,11 +235,11 @@ func usePowerup():
 			phazed = false
 			visible = true
 		
-		if ourItems[0] == "Freeze":
+		elif ourItems[0] == "Freeze":
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
 			
-				
+			
 			
 	 
 		

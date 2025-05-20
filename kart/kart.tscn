@@ -132,6 +132,7 @@ stream = ExtResource("5_lt3ne")
 bus = &"SoundEffects"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bppfki05nrnae")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
