@@ -165,10 +165,9 @@ func _physics_process(delta: float) -> void:
 	
 	if GlobalVars.currentTrack.raceStart:
 		#print("racestart")
-		if not phazed:
-			#Steering based on the tireCondition, maxing out at maxSteering
-			steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition * cold_mod)
-			engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
+		#Steering based on the tireCondition, maxing out at maxSteering
+		steering = move_toward(steering,Input.get_axis("turnRight","turnLeft") * maxSteering, delta * turnSpeed * tireCondition * cold_mod)
+		engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
 	
 	
 	# Degrading tire condition based on above variables
@@ -230,17 +229,8 @@ func usePowerup():
 		
 		elif ourItems[0] == "Phase":
 			# wait 2 seconds
-			
-			visible = false
-			phazed = true
 			$AudioStreamPlayer3D.play()
-			await get_tree().create_timer(.05).timeout
 			global_position += playerDirectionF * phaseDistance
-			
-			await get_tree().create_timer(.25).timeout
-			phazed = false
-			visible = true
-		
 		elif ourItems[0] == "Freeze":
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
