@@ -23,3 +23,6 @@ script = ExtResource("1_0lnwa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="freezeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.171876, -1.86265e-09)
 shape = SubResource("CylinderShape3D_lt3ne")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
