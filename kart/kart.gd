@@ -6,7 +6,7 @@ extends VehicleBody3D
 var maxBattery = 60
 
 var cold_mod = 1
-var cold_recovery = 0.1
+var cold_recovery = 0.2
 
 var inPit = false
 var tireType = "Medium"

@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 
-var lifetime  =  10
+var lifetime  =  4.5
 
 
 
