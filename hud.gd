@@ -84,6 +84,8 @@ func _on_host_pressed() -> void:
 func _on_join_pressed() -> void:
 	get_parent().joinGame()
 	$VBoxContainer.hide()
+	$Background.hide()
+	$Title.hide()
 
 
 func _on_start_race_pressed() -> void:
