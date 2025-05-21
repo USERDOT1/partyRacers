@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cn3sto0eew6bm"
-path="res://.godot/imported/teleport.wav-d4f9154342a9e0dc9befff05a15b7500.sample"
+uid="uid://d36tko4glnfx2"
+path="res://.godot/imported/lightBeam.wav-403aab57d2d209e3a618c13c641188cf.sample"
 
 [deps]
 
-source_file="res://teleport.wav"
-dest_files=["res://.godot/imported/teleport.wav-d4f9154342a9e0dc9befff05a15b7500.sample"]
+source_file="res://soundEffects/lightBeam.wav"
+dest_files=["res://.godot/imported/lightBeam.wav-403aab57d2d209e3a618c13c641188cf.sample"]
 
 [params]
 

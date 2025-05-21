@@ -95,6 +95,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		cold_mod = 1
 	
+	GlobalVars.hud.coldTexture.modulate.a = 1-cold_mod
+	
 	playerDirectionF = global_transform.basis.z.normalized()
 	if Input.is_action_just_pressed("usePowerup"):
 		usePowerup()
@@ -229,13 +231,12 @@ func usePowerup():
 		
 		elif ourItems[0] == "Phase":
 			# wait 2 seconds
-			$AudioStreamPlayer3D.play()
+			$PhaseSound.play()
 			global_position += playerDirectionF * phaseDistance
 		elif ourItems[0] == "Freeze":
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
-			
-				
+			$IceBeam.play()
 			
 			
 			
@@ -269,15 +270,16 @@ func areaEntered(area: Area3D) -> void:
 	if area.name == "PitstopArea":
 		inPit = true
 		print("entered Pit")
-	if area.name == "Checkpoint":
+	elif area.name == "Checkpoint":
 		checkpointPassed = true
+	elif area.name == "freezeArea":
+		print('HIT')
+		cold_mod = 0.1
+		$Frozen.play()
 	
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	#If exiting pit, setting it to false
 	if area.name == "PitstopArea":
 		inPit = false
 		print("exited Pit")
-	elif area.name == "freezeArea":
-		print('HIT')
-		cold_mod = 0.1
 		

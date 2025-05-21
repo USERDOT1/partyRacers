@@ -2,9 +2,15 @@ extends Control
 var spending = "balanced"
 @onready var StartCountdown = $StartCountdown
 @onready var kart = get_parent().get_parent()
+var coldTexture
+var raceStartButton
+
+
 func _enter_tree() -> void:
 	GlobalVars.hud = self
 	GlobalVars.startCountdown = $StartCountdown
+	coldTexture = $IceOverlay
+	raceStartButton = $StartRace
 
 
 
@@ -71,8 +77,14 @@ func round_place(num,places):
 func _on_host_pressed() -> void:
 	get_parent().hostGame()
 	$VBoxContainer.hide()
+	$Background.hide()
+	$Title.hide()
 
 
 func _on_join_pressed() -> void:
 	get_parent().joinGame()
 	$VBoxContainer.hide()
+
+
+func _on_start_race_pressed() -> void:
+	GlobalVars.currentTrack.rpc("onRaceStart")

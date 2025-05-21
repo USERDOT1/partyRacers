@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dhb1x3s5mmpi6"
-path="res://.godot/imported/itemPickup.wav-8b77aa0fb75e520ff814b190df78da96.sample"
+uid="uid://cbi7qw0xtn5m6"
+path="res://.godot/imported/iceCrack.wav-162afffa88d0db8f9cf8aa87d99cc34b.sample"
 
 [deps]
 
-source_file="res://itemPickup.wav"
-dest_files=["res://.godot/imported/itemPickup.wav-8b77aa0fb75e520ff814b190df78da96.sample"]
+source_file="res://soundEffects/iceCrack.wav"
+dest_files=["res://.godot/imported/iceCrack.wav-162afffa88d0db8f9cf8aa87d99cc34b.sample"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://l2v77imjmpif"]
 
 [ext_resource type="Script" uid="uid://ctg8emxirimth" path="res://itemBox/item_box.gd" id="1_hcbu1"]
-[ext_resource type="AudioStream" uid="uid://dhb1x3s5mmpi6" path="res://itemPickup.wav" id="2_svqbe"]
+[ext_resource type="AudioStream" uid="uid://dhb1x3s5mmpi6" path="res://soundEffects/itemPickup.wav" id="2_svqbe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hcbu1"]
 emission_enabled = true
