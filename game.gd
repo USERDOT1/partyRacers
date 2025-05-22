@@ -26,4 +26,3 @@ func add_player(playerName):
 	var player = playerKart.instantiate()
 	player.name = str(int(playerName))
 	add_child(player)
-	print(playerName)
