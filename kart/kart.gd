@@ -27,7 +27,7 @@ var spendingType = spendingList[spendingIndex]
 var phazed = false
 
 var freezeInstance #for freeze
-
+var bulletInstance
 
 var bonus = 1
 
@@ -237,10 +237,13 @@ func usePowerup():
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
 			$IceBeam.play()
-			
-			
-			
-	 
+			#bulletInstance = load("res://kart/bullet/bullet.tscn").instantiate()
+			#bulletInstance.startPosition = global_position
+			#bulletInstance.startRotation = global_rotation
+			#bulletInstance.playerDirection = playerDirectionF
+			#bulletInstance.playerForce = linear_velocity
+			#get_parent().add_child(bulletInstance)
+	 #
 		
 		
 		

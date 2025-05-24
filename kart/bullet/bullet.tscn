@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bay50rjf57c43"]
+
+[ext_resource type="Script" uid="uid://8t30gpwkhmtr" path="res://kart/bullet/bullet.gd" id="1_sygnj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c7efx"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sygnj"]
+radius = 0.1
+height = 0.4
+
+[node name="Bullet" type="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mass = 10.0
+script = ExtResource("1_sygnj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_c7efx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_sygnj")

@@ -13,7 +13,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.11113, 54.3922)
 [node name="Hud" parent="." instance=ExtResource("3_feb5d")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bney1s5re8mc8")
+_spawnable_scenes = PackedStringArray("uid://bney1s5re8mc8", "uid://bay50rjf57c43")
 spawn_path = NodePath("..")
 
 [node name="P1" type="Node3D" parent="."]
