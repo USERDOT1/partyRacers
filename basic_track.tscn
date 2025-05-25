@@ -201,7 +201,7 @@ material = ExtResource("7_8q44g")
 size = Vector3(13, 4, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a31a0"]
-size = Vector3(13, 4, 20)
+size = Vector3(14.185, 4, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fen46"]
 size = Vector3(13.11, 8, 37.87)
@@ -886,6 +886,7 @@ shape = SubResource("BoxShape3D_a31a0")
 transform = Transform3D(-0.851727, 0, 0.523986, 0, 1, 0, -0.523986, 0, -0.851727, 100.477, 0, -3.73081)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PitstopArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11031, 0, -3.72564)
 shape = SubResource("BoxShape3D_fen46")
 
 [node name="Curb35" type="StaticBody3D" parent="."]
