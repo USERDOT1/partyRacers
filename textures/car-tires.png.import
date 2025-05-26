@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bm08yb411rgud"
 path.s3tc="res://.godot/imported/car-tires.png-a2030f5d94f253c908e9c6745202ef38.s3tc.ctex"
+path.etc2="res://.godot/imported/car-tires.png-a2030f5d94f253c908e9c6745202ef38.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/car-tires.png"
-dest_files=["res://.godot/imported/car-tires.png-a2030f5d94f253c908e9c6745202ef38.s3tc.ctex"]
+dest_files=["res://.godot/imported/car-tires.png-a2030f5d94f253c908e9c6745202ef38.s3tc.ctex", "res://.godot/imported/car-tires.png-a2030f5d94f253c908e9c6745202ef38.etc2.ctex"]
 
 [params]
 

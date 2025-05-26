@@ -16,6 +16,7 @@ func _enter_tree() -> void:
 
 func _process(delta: float) -> void:
 	if GlobalVars.kart != null:
+		$SubViewportContainer/SubViewport/Camera3D.global_position = GlobalVars.kart.global_position + Vector3(0,60,0)
 		if len(GlobalVars.kart.ourItems) > 0:
 			$Item1.animation = GlobalVars.kart.ourItems[0]
 		else:

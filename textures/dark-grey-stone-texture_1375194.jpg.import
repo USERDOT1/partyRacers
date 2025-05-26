@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bw78ut44ha8m4"
 path.s3tc="res://.godot/imported/dark-grey-stone-texture_1375194.jpg-c02e10b22a489c9ab880cca66017678e.s3tc.ctex"
+path.etc2="res://.godot/imported/dark-grey-stone-texture_1375194.jpg-c02e10b22a489c9ab880cca66017678e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/dark-grey-stone-texture_1375194.jpg"
-dest_files=["res://.godot/imported/dark-grey-stone-texture_1375194.jpg-c02e10b22a489c9ab880cca66017678e.s3tc.ctex"]
+dest_files=["res://.godot/imported/dark-grey-stone-texture_1375194.jpg-c02e10b22a489c9ab880cca66017678e.s3tc.ctex", "res://.godot/imported/dark-grey-stone-texture_1375194.jpg-c02e10b22a489c9ab880cca66017678e.etc2.ctex"]
 
 [params]
 

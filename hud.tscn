@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3erjqtrfd8ws"]
+[gd_scene load_steps=19 format=3 uid="uid://c3erjqtrfd8ws"]
 
 [ext_resource type="Script" uid="uid://cdmph3y8s333" path="res://hud.gd" id="1_37p78"]
 [ext_resource type="Texture2D" uid="uid://dbut8742jqxc7" path="res://textures/energySpendingSprite.png" id="2_64ctp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b7n2bw1kgnyst" path="res://itemBox/Phaze.png" id="5_a2258"]
 [ext_resource type="Texture2D" uid="uid://dgiyqqaeqfx6v" path="res://textures/iceOverlayAsFreeze.jpg" id="7_rftc2"]
 [ext_resource type="Texture2D" uid="uid://3fx8k1u3667" path="res://BackgroundImags.jpg" id="8_61f8s"]
+[ext_resource type="Environment" uid="uid://buubymy307ee0" path="res://materials/defaultEnvironment.tres" id="9_g10ll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64ctp"]
 atlas = ExtResource("2_64ctp")
@@ -281,11 +282,28 @@ text = "Party Racers"
 
 [node name="StartRace" type="Button" parent="."]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 588.0
-offset_right = 122.0
-offset_bottom = 619.0
+offset_left = 234.0
+offset_top = 608.0
+offset_right = 317.0
+offset_bottom = 639.0
 text = "StartRace"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 2.00003
+offset_top = 433.0
+offset_right = 514.0
+offset_bottom = 945.0
+scale = Vector2(0.42, 0.42)
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 1.062, 0)
+environment = ExtResource("9_g10ll")
 
 [connection signal="pressed" from="VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]

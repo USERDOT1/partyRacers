@@ -182,7 +182,7 @@ func _physics_process(delta: float) -> void:
 	
 	#clamps tire condition (never going to hit the top, just the bottom)
 	tireCondition = clamp(tireCondition, 0.2, 100)
-	if (rotation_degrees.x > 90 || rotation_degrees.x < -90) || (rotation_degrees.z > 90 || rotation_degrees.z < -90):
+	if (rotation_degrees.x > 30 || rotation_degrees.x < -30) || (rotation_degrees.z > 30 || rotation_degrees.z < -30):
 		flipped = true
 		if Input.is_action_just_pressed("Flip"):
 			rotation_degrees.x = 0

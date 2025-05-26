@@ -10,20 +10,22 @@ func _ready() -> void:
 
 
 
-@rpc("any_peer","call_local","reliable")
+@rpc("any_peer", "call_local","reliable")
 func onRaceStart() -> void:
 	
 	print("i am the one the one the one")
-	var multiplayer = get_tree().get_multiplayer()
-	var peer_ids = multiplayer.get_peers()
-	peer_ids.append(multiplayer.get_unique_id())
+	var multiplayerVar = get_tree().get_multiplayer()
+	var peer_ids = multiplayerVar.get_peers()
+	peer_ids.append(multiplayerVar.get_unique_id())
 	peer_ids.sort()
 	#print("Peer IDS: "+str(peer_ids))
 	for i in range(len(peer_ids)):
-			#print(i)
+		print("we're on peer id: " + str(i))
 		for j in get_parent().get_child_count():
-			#print(get_parent().get_child(j))
+			print(get_parent().get_child(j).name)
 			if get_parent().get_child(j).name == str(peer_ids[i]):
+				#print(get_parent().get_child(j).name)
+				print("now we're cooking")
 				get_parent().get_child(j).position = startPositions[i]
 	
 	GlobalVars.hud.raceStartButton.hide()

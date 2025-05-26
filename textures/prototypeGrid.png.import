@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqo68i4hmuj1i"
 path.s3tc="res://.godot/imported/prototypeGrid.png-9235eebec5fa1d171c7a128ffa42b866.s3tc.ctex"
+path.etc2="res://.godot/imported/prototypeGrid.png-9235eebec5fa1d171c7a128ffa42b866.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/prototypeGrid.png"
-dest_files=["res://.godot/imported/prototypeGrid.png-9235eebec5fa1d171c7a128ffa42b866.s3tc.ctex"]
+dest_files=["res://.godot/imported/prototypeGrid.png-9235eebec5fa1d171c7a128ffa42b866.s3tc.ctex", "res://.godot/imported/prototypeGrid.png-9235eebec5fa1d171c7a128ffa42b866.etc2.ctex"]
 
 [params]
 

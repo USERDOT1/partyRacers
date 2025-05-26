@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://buubymy307ee0"]
+
+[ext_resource type="Texture2D" uid="uid://bthivhuv27ofu" path="res://textures/Epic_BlueSunset_EquiRect_flat.png" id="1_y4rji"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bv6v8"]
+panorama = ExtResource("1_y4rji")
+
+[sub_resource type="Sky" id="Sky_lt3ne"]
+sky_material = SubResource("PanoramaSkyMaterial_bv6v8")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_lt3ne")
+glow_enabled = true
