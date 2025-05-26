@@ -19,10 +19,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalVars="*res://GlobalVars.gd"
+Console="*res://addons/console/console.gd"
 
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/console/plugin.cfg")
 
 [input]
 

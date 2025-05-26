@@ -172,13 +172,15 @@ func _physics_process(delta: float) -> void:
 		engine_force = Input.get_axis("break","throttle") * (baseEnginePower)* bonus
 	
 	
+	
 	# Degrading tire condition based on above variables
-	if tireType == "Soft":
-		tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(softDegDiv*1000000)
-	elif tireType == "Medium":
-		tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(mediumDegDiv*1000000)
-	elif tireType == "Hard":
-		tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(hardDegDiv*1000000)
+	if GlobalVars.tiresDegradeForMe:
+		if tireType == "Soft":
+			tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(softDegDiv*1000000)
+		elif tireType == "Medium":
+			tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(mediumDegDiv*1000000)
+		elif tireType == "Hard":
+			tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(hardDegDiv*1000000)
 	
 	#clamps tire condition (never going to hit the top, just the bottom)
 	tireCondition = clamp(tireCondition, 0.2, 100)

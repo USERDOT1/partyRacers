@@ -3,7 +3,7 @@ var maxLaps = 9
 
 var raceStart = false
 
-var startPositions = [Vector3(-5.692,-4.092,8.257),Vector3(-2.335,-4.092,5.776),Vector3(1.458,-4.092,1.748),Vector3(5.903,-4.092,-2.52)]
+var startPositions = [Vector3(-5.692,-4.092,8.257),Vector3(-2.335,-4.092,5.776),Vector3(1.458,-4.092,1.748),Vector3(5.903,-4.092,-2.52),Vector3(-5.636,0,-2.52)]
 
 func _ready() -> void:
 	GlobalVars.currentTrack = self

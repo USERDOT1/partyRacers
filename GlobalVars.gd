@@ -9,3 +9,5 @@ var currentTrack
 var startCountdown
 
 var gameHosted = false
+
+var tiresDegradeForMe = true

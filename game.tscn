@@ -27,3 +27,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45773, -4.09163, 1.74787)
 
 [node name="P4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.90285, -4.09163, -2.51978)
+
+[node name="P5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63577, -4.09163, -2.51978)

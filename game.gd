@@ -3,6 +3,34 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 const playerKart = preload("res://kart/kart.tscn")
 
+func _ready() -> void:
+	print("readt")
+	Console.add_command("turnOnTireDegSelf", console_turnOnTireDegSelf)
+	Console.add_command("turnOffTireDegSelf", console_turnOffTireDegSelf)
+	Console.add_command("turnOnTireDegAll", console_turnOnTireDegAll.rpc)
+	Console.add_command("turnOffTireDegAll", console_turnOffTireDegAll.rpc)
+	
+func console_turnOnTireDegSelf():
+	Console.print_line("Tires will degrade!")
+	GlobalVars.tiresDegradeForMe = true
+	
+func console_turnOffTireDegSelf():
+	Console.print_line("Tires will not degrade!")
+	GlobalVars.tiresDegradeForMe = false
+
+@rpc("any_peer", "call_local","reliable")
+func console_turnOnTireDegAll():
+	Console.print_line("Tires will degrade for everyone!")
+	GlobalVars.tiresDegradeForMe = true
+
+@rpc("any_peer", "call_local","reliable")
+func console_turnOffTireDegAll():
+	Console.print_line("Tires will not degrade for everyone!")
+	GlobalVars.tiresDegradeForMe = false
+
+
+
+
 func hostGame():
 	peer.create_server(8910,5)
 	
