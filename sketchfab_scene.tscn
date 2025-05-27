@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5omn8lupq2o3"]
+
+[ext_resource type="PackedScene" uid="uid://dd2k703u7fgqx" path="res://realistic_pine_tree_6_free/scene.gltf" id="1_r57si"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_r57si")]
