@@ -1100,12 +1100,21 @@ mesh = SubResource("BoxMesh_6k3nd")
 shape = SubResource("BoxShape3D_tymbd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.989152, -0.146894, 0, 0.146894, 0.989152, 37.2668, 0, 49.902)
+transform = Transform3D(1, 0, 0, 0, 0.989152, -0.146894, 0, 0.146894, 0.989152, 37.2668, 0, 42.571)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_3csay")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_a31a0")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.995577, -0.0939514, 0, 0.0939514, 0.995577, 37.2668, -0.692475, 50.8466)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_3csay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
 shape = SubResource("BoxShape3D_a31a0")
 
 [node name="PitstopArea" type="Area3D" parent="."]
