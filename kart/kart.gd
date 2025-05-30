@@ -87,7 +87,8 @@ func _physics_process(delta: float) -> void:
 		return
 	else:
 		$Playercam.make_current()
-		
+		$Name.text = GlobalVars.myName
+		$Name.modulate = GlobalVars.myNameColor
 		GlobalVars.kart = self
 	
 	if (cold_mod + delta * cold_recovery) < 1:

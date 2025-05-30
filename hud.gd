@@ -76,17 +76,25 @@ func round_place(num,places):
 
 
 func _on_host_pressed() -> void:
+	GlobalVars.myName = $VBoxContainer/LineEdit.text
+	GlobalVars.myNameColor = $PlayerColorPicker.color
 	get_parent().hostGame()
 	$VBoxContainer.hide()
 	$Background.hide()
 	$Title.hide()
+	$PlayerColorPicker.hide()
+	$PlayerLabelColor.hide()
 
 
 func _on_join_pressed() -> void:
+	GlobalVars.myName = $VBoxContainer/LineEdit.text
+	GlobalVars.myNameColor = $PlayerColorPicker.color
 	get_parent().joinGame()
 	$VBoxContainer.hide()
 	$Background.hide()
 	$Title.hide()
+	$PlayerColorPicker.hide()
+	$PlayerLabelColor.hide()
 
 
 func _on_start_race_pressed() -> void:

@@ -11,3 +11,6 @@ var startCountdown
 var gameHosted = false
 
 var tiresDegradeForMe = true
+
+var myName
+var myNameColor
