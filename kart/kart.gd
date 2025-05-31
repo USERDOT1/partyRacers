@@ -17,7 +17,7 @@ var tireIndex = 1
 
 var softDegDiv = 10
 var mediumDegDiv = 30 #Medium Tire Degs 3x Slower than soft
-var hardDegDiv = 100 #Hard Tire Degs 
+var hardDegDiv = 90 #Hard Tire Degs 
 
 var battery = 30
 var spendingList = ["Ultra Recharge", "Big Recharge", "Recharge", "Balanced", "Spend", "Big Spend", "Ultra Spend"]
@@ -49,7 +49,7 @@ var ourItems = []
 
 var laps = 0
 
-var checkpointPassed = false
+var checkpointPassed = true
 
 
 var flipped = false
@@ -59,6 +59,10 @@ var boostFalloff = 150
 var boostPower = 780
 var phaseDistance = 18
 
+var fastestLapTime = 1000
+var fastestLapPlayer = "none"
+
+var laptime = 1000
 func _ready() -> void:
 	
 	tireType = tireList[tireIndex]
@@ -80,7 +84,9 @@ func _enter_tree() -> void:
 	if is_multiplayer_authority():
 		
 		GlobalVars.kart = self
-	
+
+
+
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		$CarBody.material_override = load("res://materials/blueKart.tres")
@@ -108,6 +114,7 @@ func _physics_process(delta: float) -> void:
 	# If we are in the track, increase the timer
 	if inTrack and GlobalVars.currentTrack.raceStart:
 		timer += delta
+		laptime += delta
 	
 	#Hotkeys for Changing Battery
 	if Input.is_action_just_pressed("ChangeBatteryUp"):
@@ -128,33 +135,33 @@ func _physics_process(delta: float) -> void:
 			#print(spendingType)
 	
 	# Subject to change in the future from a multiplyer to an addative
-	if spendingType == "Ultra Recharge":
+	if spendingType == "Ultra Recharge" && GlobalVars.currentTrack.raceStart:
 		bonus = 0.5
 		battery += 1.8*delta
 		
-	elif spendingType == "Big Recharge":
+	elif spendingType == "Big Recharge" && GlobalVars.currentTrack.raceStart:
 		bonus = 0.65
 		battery += 1.3*delta
-	elif spendingType == "Recharge":
+	elif spendingType == "Recharge" && GlobalVars.currentTrack.raceStart:
 		bonus = 0.8
 		battery += delta
-	elif spendingType == "Balanced":
+	elif spendingType == "Balanced" && GlobalVars.currentTrack.raceStart:
 		bonus = 1
-	elif spendingType == "Spend":
+	elif spendingType == "Spend" && GlobalVars.currentTrack.raceStart:
 		bonus = 1.2
 		if battery - (delta) > 0:
 			battery -= delta
 		else: #adjusts battery back to balance
 			spendingIndex = 3
 			
-	elif spendingType == "Big Spend":
+	elif spendingType == "Big Spend" && GlobalVars.currentTrack.raceStart:
 		bonus = 1.35
 		if battery - (1.3*delta) > 0:
 			battery -= 1.3*delta
 		else: 
 			spendingIndex = 3
 			
-	elif spendingType == "Ultra Spend":
+	elif spendingType == "Ultra Spend" && GlobalVars.currentTrack.raceStart:
 		bonus = 1.5
 		if battery - (1.8*delta) > 0:
 			battery -= 1.8*delta
@@ -265,19 +272,24 @@ func areaEntered(area: Area3D) -> void:
 	#if area.name == "Start":
 	#	inTrack = true
 	if area.name == "Finish":
-		if laps != (GlobalVars.currentTrack.maxLaps):
-			laps += 1
-		else:
-			if checkpointPassed:
+		if checkpointPassed:
+			checkpointPassed = false
+			if laps != (GlobalVars.currentTrack.maxLaps):
+				laps += 1
+				laptime = 0
+			else:
 				if bestTime > timer:
 					bestTime = timer
 				timer = 0
 				laps = 1
+				laptime = 0
 	if area.name == "PitstopArea":
 		inPit = true
 		print("entered Pit")
 	elif area.name == "Checkpoint":
 		checkpointPassed = true
+	
+	
 	elif area.name == "freezeArea":
 		print('HIT')
 		cold_mod = 0.1

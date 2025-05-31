@@ -317,6 +317,7 @@ offset_right = 89.0
 offset_bottom = 29.0
 text = "color picker"
 color = Color(1, 1, 1, 1)
+edit_alpha = false
 
 [node name="PlayerLabelColor" type="Label" parent="."]
 z_index = 1
