@@ -4,6 +4,22 @@ var peer = ENetMultiplayerPeer.new()
 const playerKart = preload("res://kart/kart.tscn")
 
 func _ready() -> void:
+	if OS.has_feature("dedicated_server"):
+		peer.create_server(8910,5)
+	
+		multiplayer.multiplayer_peer = peer
+	 
+		multiplayer.peer_connected.connect(
+			func(pid):
+				print("Peer " + str(pid) + " has joined the game")
+				add_player(pid)
+		)
+		
+		#Dont add a plyer because its a server dumbass
+		await await get_tree().create_timer(1).timeout
+		GlobalVars.gameHosted = true
+	
+	
 	print("readt")
 	Console.add_command("turnOnTireDegSelf", console_turnOnTireDegSelf)
 	Console.add_command("turnOffTireDegSelf", console_turnOffTireDegSelf)
@@ -47,7 +63,7 @@ func hostGame():
 	GlobalVars.gameHosted = true
 	
 func joinGame():
-	peer.create_client("play.partyracers.com",8910,5)
+	peer.create_client("54.84.36.7",8910,5)
 	multiplayer.multiplayer_peer = peer
 
 func add_player(playerName):
