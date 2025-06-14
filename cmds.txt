@@ -1,0 +1,5 @@
+./linuxServer/partyRacersLinuxerver.x86_64
+scp -i .\privateKey\partyRacersServerKey.pem -r .\linuxServer\ ec2-user@ec2-54-84-36-7.compute-1.amazonaws.com:~/.
+chmod +x linuxServer/*
+rm -r linuxServer/
+ssh -i .\privateKey\partyRacersServerKey.pem ec2-user@ec2-54-84-36-7.compute-1.amazonaws.com

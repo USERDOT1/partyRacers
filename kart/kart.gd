@@ -56,7 +56,7 @@ var flipped = false
 
 var boostFalloff = 150
 
-var boostPower = 780
+var boostPower = 570
 var phaseDistance = 18
 
 var fastestLapTime = 1000
@@ -207,12 +207,12 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ChangeWheelsUp"):
 			if tireIndex == 2:
 				print('Maxed out (cant make tires harder)')#add visual
-				tireCondition = 0.8
+				tireCondition = 0.85
 			else:
 				tireIndex = (tireIndex + 1)
 				tireType = tireList[tireIndex]
 				if tireList[tireIndex] == "Hard":
-					tireCondition = 0.8
+					tireCondition = 0.85
 				if tireList[tireIndex] == "Medium":
 					tireCondition = 1.2
 		if Input.is_action_just_pressed("ChangeWheelsDown"):
