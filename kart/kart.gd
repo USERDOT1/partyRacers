@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 @export var baseEnginePower = 300
-@export var turnSpeed = 6
+@export var turnSpeed = 8
 @export var tireCondition = 1.2
 var maxBattery = 60
 
@@ -190,8 +190,8 @@ func _physics_process(delta: float) -> void:
 		elif tireType == "Hard":
 			tireCondition -= (abs($FrontLeft.get_rpm()) + abs($FrontRight.get_rpm()) + abs($BackRight.get_rpm()) + abs($BackLeft.get_rpm()))/(hardDegDiv*1000000)
 	
-	#clamps tire condition (never going to hit the top, just the bottom)
-	tireCondition = clamp(tireCondition, 0.2, 100)
+	#clamps tire condition
+	tireCondition = clamp(tireCondition, 0.2, 2)
 	if (rotation_degrees.x > 30 || rotation_degrees.x < -30) || (rotation_degrees.z > 30 || rotation_degrees.z < -30):
 		flipped = true
 		if Input.is_action_just_pressed("Flip"):

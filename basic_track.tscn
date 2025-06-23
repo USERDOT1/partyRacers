@@ -1767,3 +1767,7 @@ mesh = ExtResource("12_6k3nd")
 transform = Transform3D(-6.11959e-10, 0, -0.014, 0, 0.014, 0, 0.014, 0, -6.11959e-10, 18.973, 2.06508, -21.3974)
 material_override = SubResource("StandardMaterial3D_v8dt2")
 mesh = ExtResource("12_6k3nd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.208492, 0.978024, 0, -0.978024, -0.208492, 0, 65.8916, 0)
+light_energy = 1.2
