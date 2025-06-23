@@ -4,8 +4,11 @@ var spending = "balanced"
 @onready var kart = get_parent().get_parent()
 var coldTexture
 var raceStartButton
-
-
+#var place
+@export var firstPlaceColor:Color
+@export var secondPlaceColor:Color
+@export var thirdPlaceColor:Color
+@export var otherPlaceColor:Color
 func _enter_tree() -> void:
 	GlobalVars.hud = self
 	GlobalVars.startCountdown = $StartCountdown
@@ -15,6 +18,7 @@ func _enter_tree() -> void:
 
 
 func _process(delta: float) -> void:
+	
 	if GlobalVars.kart != null:
 		
 		$SubViewportContainer/SubViewport/Camera3D.global_position = GlobalVars.kart.global_position + Vector3(0,60,0)
@@ -56,7 +60,15 @@ func _process(delta: float) -> void:
 		
 		#Instead of using a if statement used this cool thing that speaks for itself
 		$ResetText.visible = GlobalVars.kart.flipped
-		
+		if GlobalVars.kart.place == 1:
+			$PlayerPlace.add_theme_color_override("font_color", firstPlaceColor)
+		elif GlobalVars.kart.place == 2:
+			$PlayerPlace.add_theme_color_override("font_color", secondPlaceColor)
+		elif GlobalVars.kart.place == 3:
+			$PlayerPlace.add_theme_color_override("font_color", thirdPlaceColor)
+		else:
+			$PlayerPlace.add_theme_color_override("font_color", otherPlaceColor)
+		$PlayerPlace.text = str(GlobalVars.kart.place)
 		$Laps.text = "Lap " + str(GlobalVars.kart.laps) + "/" + str(GlobalVars.currentTrack.maxLaps)
 		
 		$TireCondition.text = "Tire Condition: " + str(roundi(GlobalVars.kart.tireCondition*1000))

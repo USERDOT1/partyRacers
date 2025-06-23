@@ -7,7 +7,7 @@ var startPositions = [Vector3(-5.692,-4.092,8.257),Vector3(-2.335,-4.092,5.776),
 
 func _ready() -> void:
 	GlobalVars.currentTrack = self
-
+	GlobalVars.trackRacingLine = $racingLine
 
 
 @rpc("any_peer", "call_local","reliable")

@@ -136,6 +136,10 @@ animations = [{
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_37p78")
+firstPlaceColor = Color(0.852495, 0.555572, 0.205682, 1)
+secondPlaceColor = Color(0.633403, 0.89021, 0.851006, 1)
+thirdPlaceColor = Color(0.723429, 0.613881, 0.413718, 1)
+otherPlaceColor = Color(1, 1, 1, 1)
 
 [node name="TireCondition" type="Label" parent="."]
 layout_mode = 0
@@ -327,6 +331,18 @@ offset_top = 5.0
 offset_right = 199.0
 offset_bottom = 28.0
 text = "Player Label Color"
+
+[node name="PlayerPlace" type="Label" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 238.0
+offset_top = 556.0
+offset_right = 278.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 61
 
 [connection signal="pressed" from="VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]

@@ -2,12 +2,32 @@ extends Node
 
 var peer = ENetMultiplayerPeer.new()
 const playerKart = preload("res://kart/kart.tscn")
+var playersReal = []
+var playersNames = []
+var allChildren = []
+func _process(delta: float) -> void:
+	playersReal = self.get_children()
+	playersReal.erase($BasicTrack)
+	playersReal.erase($Hud)
+	playersReal.erase($MultiplayerSpawner)
+	playersReal.erase($P1)
+	playersReal.erase($P2)
+	playersReal.erase($P3)
+	playersReal.erase($P4)
+	playersReal.erase($P5)
+	playersReal.sort_custom(func(a, b): return a.percentDone > b.percentDone)
+	#print()
+	playersNames = []
+	for i in allChildren:
+		playersNames.append(i.myName)
+	print(playersReal)
+	print(playersNames)
 
 func hostGame():
 	peer.create_server(8910,5)
 	
 	multiplayer.multiplayer_peer = peer
-	 
+	
 	multiplayer.peer_connected.connect(
 		func(pid):
 			print("Peer " + str(pid) + " has joined the game")
@@ -26,10 +46,11 @@ func add_player(playerName):
 	var player = playerKart.instantiate()
 	player.name = str(int(playerName))
 	add_child(player)
-	print(playerName)
-
-func _ready() -> void:
 	
+	playersReal.append(player)
+#	print(playerName)
+	
+func _ready() -> void:
 	if OS.has_feature("dedicated_server"):
 		hostGame()
 	Console.add_command("turnOnTireDegSelf", console_turnOnTireDegSelf)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=4 uid="uid://jbvvpfdptouy"]
+[gd_scene load_steps=89 format=4 uid="uid://jbvvpfdptouy"]
 
 [ext_resource type="Texture2D" uid="uid://is8rl0ajj4af" path="res://textures/GrassTexture.jpg" id="1_g6n3r"]
 [ext_resource type="Script" uid="uid://cne6r02cif0q6" path="res://basic_track.gd" id="1_kfwyd"]
@@ -445,6 +445,15 @@ shadow_mesh = SubResource("ArrayMesh_qji0f")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8dt2"]
 albedo_texture = ExtResource("12_tymbd")
+
+[sub_resource type="Curve3D" id="Curve3D_tymbd"]
+closed = true
+bake_interval = 0.1
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.16, 0, 11.135, 0, 0, 0, 0, 0, 0, 0, 0, 104.995, 0, 0, 0, 0, 0, 0, 16.135, 0, 115.3, 0, 0, 0, 0, 0, 0, 36.475, 0, 107.105, 0, 0, 0, 0, 0, 0, 36.475, 3.295, 77.7028, 0, 0, 0, 0, 0, 0, 36.475, -0.365, 77.2615, 0, 0, 0, 0, 0, 0, 40.2787, -0.365, 8.185, 0, 0, 0, 0, 0, 0, 117.355, -0.365, 9.8326, 0, 0, 0, 0, 0, 0, 92.195, -0.365, -106.04, 0, 0, 0, 0, 0, 0, 43.7135, -0.365, -111.745, 0, 0, 0, 0, 0, 0, 43.51, -0.365, -36.375, 0, 0, 0, 0, 0, 0, 3.80942, 0, -24.82),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 12
 
 [node name="BasicTrack" type="Node3D"]
 script = ExtResource("1_kfwyd")
@@ -1771,3 +1780,7 @@ mesh = ExtResource("12_6k3nd")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.208492, 0.978024, 0, -0.978024, -0.208492, 0, 65.8916, 0)
 light_energy = 1.2
+
+[node name="racingLine" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.881718, -45.6523)
+curve = SubResource("Curve3D_tymbd")

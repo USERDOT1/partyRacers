@@ -14,3 +14,5 @@ var tiresDegradeForMe = true
 
 var myName
 var myNameColor
+
+var trackRacingLine

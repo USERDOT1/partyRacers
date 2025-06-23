@@ -38,7 +38,7 @@ var identification = "kart"
 
 var playerDirectionF 
 
-
+@export var myName:String
 
 
 var kartBaseFriction = 10.5
@@ -63,8 +63,11 @@ var fastestLapTime = 1000
 var fastestLapPlayer = "none"
 
 var laptime = 1000
+
+@export var percentDone:float
+
+var place
 func _ready() -> void:
-	
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
 	#Setting wheel friction to a variable
@@ -88,13 +91,18 @@ func _enter_tree() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	percentDone = (GlobalVars.trackRacingLine.curve.get_closest_offset(global_position) / GlobalVars.trackRacingLine.curve.get_baked_length()) + laps
 	if not is_multiplayer_authority():
 		$CarBody.material_override = load("res://materials/blueKart.tres")
 		return
 	else:
+		for i in len(get_parent().playersReal):
+			if get_parent().playersReal[i] == self:
+				place = i+1
+		myName = GlobalVars.myName
 		$Playercam.make_current()
-		$Name.text = GlobalVars.myName
-		$Name.modulate = GlobalVars.myNameColor
+		$NameTag.text = GlobalVars.myName
+		$NameTag.modulate = GlobalVars.myNameColor
 		GlobalVars.kart = self
 	
 	if (cold_mod + delta * cold_recovery) < 1:
@@ -276,6 +284,7 @@ func areaEntered(area: Area3D) -> void:
 			checkpointPassed = false
 			if laps != (GlobalVars.currentTrack.maxLaps):
 				laps += 1
+				percentDone += 1
 				laptime = 0
 			else:
 				if bestTime > timer:
