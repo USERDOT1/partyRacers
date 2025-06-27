@@ -67,6 +67,8 @@ var laptime = 1000
 @export var percentDone:float
 
 var place
+
+var bestLapTime = 1000
 func _ready() -> void:
 	tireType = tireList[tireIndex]
 	GlobalVars.hud.spending = spendingType
@@ -255,13 +257,6 @@ func usePowerup():
 			freezeInstance = load("res://freeze_beam.tscn").instantiate()
 			add_child(freezeInstance)
 			$IceBeam.play()
-			#bulletInstance = load("res://kart/bullet/bullet.tscn").instantiate()
-			#bulletInstance.startPosition = global_position
-			#bulletInstance.startRotation = global_rotation
-			#bulletInstance.playerDirection = playerDirectionF
-			#bulletInstance.playerForce = linear_velocity
-			#get_parent().add_child(bulletInstance)
-	 #
 		
 		
 		
@@ -282,12 +277,12 @@ func areaEntered(area: Area3D) -> void:
 	if area.name == "Finish":
 		if checkpointPassed:
 			checkpointPassed = false
+			finishedLap(laptime,myName)
 			if laps != (GlobalVars.currentTrack.maxLaps):
 				laps += 1
-				percentDone += 1
 				laptime = 0
 			else:
-				if bestTime > timer:
+				if timer < bestTime:
 					bestTime = timer
 				timer = 0
 				laps = 1
@@ -300,7 +295,7 @@ func areaEntered(area: Area3D) -> void:
 	
 	
 	elif area.name == "freezeArea":
-		print('HIT')
+		print('Hit by freeze beam')
 		cold_mod = 0.1
 		$Frozen.play()
 	
@@ -310,3 +305,8 @@ func _on_area_3d_area_exited(area: Area3D) -> void:
 		inPit = false
 		print("exited Pit")
 		
+@rpc ("any_peer", "call_local", "reliable")
+func finishedLap(finishedLapTime,finishedLapPlayer):
+	if finishedLapTime < bestLapTime:
+		bestLapTime = finishedLapTime
+		GlobalVars.hud.displayFastestLap(finishedLapTime,finishedLapPlayer,$NameTag.modulate)

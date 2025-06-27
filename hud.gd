@@ -9,6 +9,9 @@ var raceStartButton
 @export var secondPlaceColor:Color
 @export var thirdPlaceColor:Color
 @export var otherPlaceColor:Color
+
+@export var fastestLapLabel:PackedScene
+var instance
 func _enter_tree() -> void:
 	GlobalVars.hud = self
 	GlobalVars.startCountdown = $StartCountdown
@@ -112,3 +115,10 @@ func _on_join_pressed() -> void:
 
 func _on_start_race_pressed() -> void:
 	GlobalVars.currentTrack.rpc("onRaceStart")
+
+func displayFastestLap(hudLapTime,hudLapPlayer,color):
+	instance = fastestLapLabel.instantiate()
+	instance.text = hudLapPlayer+ " has set the fastest lap: " + str(round_place(hudLapTime,2))
+	instance.modulate = color
+	add_child(instance)
+	

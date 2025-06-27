@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3up2ku4xprk6"]
+
+[ext_resource type="Script" uid="uid://c63tr3intctv2" path="res://fastest_lap.gd" id="1_mbk03"]
+
+[node name="FastestLap" type="Label"]
+z_index = 5
+offset_left = 664.0
+offset_top = 151.0
+offset_right = 877.0
+offset_bottom = 195.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 31
+text = "FastestLap: 32"
+script = ExtResource("1_mbk03")

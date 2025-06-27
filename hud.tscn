@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3erjqtrfd8ws"]
+[gd_scene load_steps=20 format=3 uid="uid://c3erjqtrfd8ws"]
 
 [ext_resource type="Script" uid="uid://cdmph3y8s333" path="res://hud.gd" id="1_37p78"]
 [ext_resource type="Texture2D" uid="uid://dbut8742jqxc7" path="res://textures/energySpendingSprite.png" id="2_64ctp"]
+[ext_resource type="PackedScene" uid="uid://c3up2ku4xprk6" path="res://fastest_lap.tscn" id="2_gpiub"]
 [ext_resource type="Texture2D" uid="uid://b6ab30a3d4p0l" path="res://itemBox/Boost.png" id="3_640wx"]
 [ext_resource type="Texture2D" uid="uid://dt7xhcn14tqvy" path="res://itemBox/Empty.png" id="4_a2258"]
 [ext_resource type="Texture2D" uid="uid://b6tqk7jvhx0b3" path="res://itemBox/FreezeSprite.png" id="5_1xsix"]
@@ -140,11 +141,13 @@ firstPlaceColor = Color(0.852495, 0.555572, 0.205682, 1)
 secondPlaceColor = Color(0.633403, 0.89021, 0.851006, 1)
 thirdPlaceColor = Color(0.723429, 0.613881, 0.413718, 1)
 otherPlaceColor = Color(1, 1, 1, 1)
+fastestLapLabel = ExtResource("2_gpiub")
 
 [node name="TireCondition" type="Label" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_constants/outline_size = 2
 text = "Tire Condition: "
 
 [node name="TireType" type="Label" parent="."]
@@ -152,6 +155,7 @@ layout_mode = 0
 offset_top = 26.0
 offset_right = 76.0
 offset_bottom = 49.0
+theme_override_constants/outline_size = 2
 text = "Tire Type:"
 
 [node name="BatteryDisplay" type="Label" parent="."]
@@ -160,6 +164,7 @@ offset_left = 1053.0
 offset_top = 396.0
 offset_right = 1119.0
 offset_bottom = 419.0
+theme_override_constants/outline_size = 2
 text = "Battery: "
 
 [node name="Timer" type="Label" parent="."]
@@ -167,6 +172,7 @@ layout_mode = 1
 offset_left = 987.0
 offset_right = 1139.0
 offset_bottom = 23.0
+theme_override_constants/outline_size = 2
 text = "Current Time: 0.000"
 vertical_alignment = 1
 
@@ -176,6 +182,7 @@ offset_left = 987.0
 offset_top = 66.0
 offset_right = 1139.0
 offset_bottom = 89.0
+theme_override_constants/outline_size = 2
 text = "Lap 0/5"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -186,6 +193,7 @@ offset_left = 989.0
 offset_top = 33.0
 offset_right = 1074.0
 offset_bottom = 56.0
+theme_override_constants/outline_size = 2
 text = "among us"
 horizontal_alignment = 2
 
@@ -195,12 +203,14 @@ offset_left = 4.0
 offset_top = 309.0
 offset_right = 139.0
 offset_bottom = 332.0
+theme_override_constants/outline_size = 2
 
 [node name="Pit Condition" type="Label" parent="."]
 layout_mode = 0
 offset_top = 56.0
 offset_right = 40.0
 offset_bottom = 79.0
+theme_override_constants/outline_size = 2
 text = "In Pit
 (Use left and right arrows to switch tires)"
 
@@ -211,6 +221,7 @@ offset_top = 23.0
 offset_right = 633.0
 offset_bottom = 83.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 vertical_alignment = 1

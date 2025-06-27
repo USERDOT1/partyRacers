@@ -20,8 +20,6 @@ func _process(delta: float) -> void:
 	playersNames = []
 	for i in allChildren:
 		playersNames.append(i.myName)
-	print(playersReal)
-	print(playersNames)
 
 func hostGame():
 	peer.create_server(8910,5)
